@@ -14,9 +14,9 @@ $(document).ready(function() {
         }
 
         if (query.startsWith('#')) {
-            url = `/ishistagram/public/autocomplete/tags?query=${query.substring(1)}`;
+            url = `/autocomplete/tags?query=${query.substring(1)}`;
         } else {
-            url = `/ishistagram/public/autocomplete/users?query=${query}`;
+            url = `/autocomplete/users?query=${query}`;
         }
 
         $.ajax({
@@ -36,7 +36,7 @@ $(document).ready(function() {
                     if (query.startsWith('#')) {
                         resultItem.text('#' + result.name);
                         resultItem.click(function() {
-                            window.location.href = `/ishistagram/public/search/tags?query=${result.name}`;
+                            window.location.href = `/search/tags?query=${result.name}`;
                         });
                     } else {
                         let profileImageDiv = $("<div class='profile-image-container'></div>");
@@ -51,7 +51,7 @@ $(document).ready(function() {
                         userInfoContainer.append(userName, name);
                         resultItem.append(profileImageDiv, userInfoContainer);
                         resultItem.click(function() {
-                            window.location.href = `/ishistagram/public/profile/${result.id}`;
+                            window.location.href = `/profile/${result.id}`;
                         });
                     }
                     resultsDiv.append(resultItem);
