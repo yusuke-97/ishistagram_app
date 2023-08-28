@@ -13,7 +13,7 @@
         @endphp
 
         <!-- 投稿リンク -->
-        <a href="{{ route('profile.default') }}" class="me-4 text-decoration-none" style="{{ $isPostActive ? 'font-weight: bold; color: black;' : 'color: gray;' }}">
+        <a href="{{ route('profile.index', ['id' => $user->id]) }}" class="me-4 text-decoration-none" style="{{ $isPostActive ? 'font-weight: bold; color: black;' : 'color: gray;' }}">
             <i class="fa-solid fa-table-cells me-1" style="{{ $isPostActive ? 'color: black;' : 'color: gray;' }}"></i>
             <span style="font-size: 90%;">投稿</span>
         </a>
@@ -29,7 +29,7 @@
         <ul class="dropdown-menu" aria-labelledby="labelDropdown">
 
             <!-- 「すべて表示」のリンク -->
-            <li><a class="dropdown-item" href="{{ route('profile.default') }}">すべて表示</a></li>
+            <li><a class="dropdown-item" href="{{ route('profile.index', ['id' => $user->id]) }}">すべて表示</a></li>
 
             <!-- 各ラベルをループして表示 -->
             @foreach($labels as $label)
