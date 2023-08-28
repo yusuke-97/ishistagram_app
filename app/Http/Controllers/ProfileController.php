@@ -127,7 +127,7 @@ class ProfileController extends Controller
         }
         // 画像がアップロードされた場合の処理
         elseif ($request->hasFile('profile_image')) {
-            $fileName = $request->file('profile_image')->store('profile_images', 's3');
+            $fileName = Storage::disk('s3')->put('profile_images', $request->file('profile_image'), 'public');
             $profile->profile_image = basename($fileName);
         }
 
