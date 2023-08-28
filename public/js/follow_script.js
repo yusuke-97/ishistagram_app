@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function createUserLink(element, user) {
         var userLink = document.createElement('a');
-        userLink.href = '/ishistagram/public/profile/' + user.id;
+        userLink.href = '/profile/' + user.id;
         userLink.style.textDecoration = 'none'; // 下線を削除
         userLink.className = 'd-flex align-items-center'; // 横並びに
     
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.log("showFollowersButton clicked");
             e.preventDefault();
 
-            var url = '/ishistagram/public/user/' + userId + '/followers';
+            var url = '/user/' + userId + '/followers';
 
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.log("showFollowingButton clicked");
             e.preventDefault();
 
-            var url = '/ishistagram/public/user/' + userId + '/following';
+            var url = '/user/' + userId + '/following';
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // フォロー解除機能
 function unfollow(userId) {
     if (window.confirm('フォローを解除しますか？')) {
-        var url = '/ishistagram/public/unfollow/' + userId;
+        var url = '/unfollow/' + userId;
         var xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function() {
