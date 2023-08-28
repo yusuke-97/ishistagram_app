@@ -56,6 +56,7 @@ class PostController extends Controller
         if ($files = $request->file('image')) {
             foreach ($files as $file) {
                 $path = Storage::disk('s3')->put('post_images', $file, 'public');
+                return $path;
                 // 保存先のパスをImageモデルに設定
                 $image = new Image();
                 $image->file_path = $path;
