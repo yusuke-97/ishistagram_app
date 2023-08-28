@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Label;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -54,7 +55,7 @@ class PostController extends Controller
         // 複数ファイルを保存し、保存先のパスを取得
         if ($files = $request->file('image')) {
             foreach ($files as $file) {
-                $path = $file->store('post_images', 's3');
+                $path = Storage::disk('s3')->put('/post_images', $file, 'public');
                 // 保存先のパスをImageモデルに設定
                 $image = new Image();
                 $image->file_path = $path;
