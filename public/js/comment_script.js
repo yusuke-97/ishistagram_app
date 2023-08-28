@@ -38,7 +38,7 @@ function submitComment(postId) {
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
     $.ajax({
-        url: '/ishistagram/public/comments',
+        url: '/comments',
         method: 'POST',
         data: {
             content: commentText,
@@ -98,7 +98,7 @@ function deleteComment(commentId) {
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
     $.ajax({
-        url: '/ishistagram/public/comments/' + commentId,
+        url: '/comments/' + commentId,
         method: 'DELETE',
         data: {
             _token: csrf_token
