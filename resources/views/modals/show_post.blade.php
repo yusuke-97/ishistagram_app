@@ -25,7 +25,7 @@
 
                         <!-- ユーザープロフィール画像の表示 -->
                         @if($post->user->profile_image)
-                        <img class="modal-profile-image" src="{{ Storage::disk('s3')->url(profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
+                        <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
                         @else
 
                         <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
