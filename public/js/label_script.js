@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 function fetchUserLabels() {
     $.ajax({
-        url: '/ishistagram/public/labels',
+        url: '/labels',
         method: 'GET',
         success: function(response) {
             if (response.labels) {
