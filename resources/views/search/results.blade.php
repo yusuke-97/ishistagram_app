@@ -22,7 +22,7 @@
 
                 <!-- 投稿の画像をループで表示。複数画像の場合、最初の画像のみ表示する。 -->
                 @foreach($post->images as $key => $image)
-                <img src="{{ asset('storage/' . $image->file_path) }}" alt="投稿画像" class="{{ $key == 0 ? 'ishistagram-post-image' : 'd-none' }}">
+                <img src="{{ Storage::disk('s3')->url($image->file_path) }}" alt="投稿画像" class="{{ $key == 0 ? 'ishistagram-post-image' : 'd-none' }}">
                 @endforeach
 
                 <!-- 投稿に複数の画像がある場合、多画像存在を示すアイコンを表示 -->

@@ -5,7 +5,7 @@
     <div class="col-sm-4 text-center">
         @if($user->profile_image)
         <!-- プロフィール画像の表示 -->
-        <img class="profile-image" src="{{ asset('storage/profile_images/' . $user->profile_image) }}" alt="プロフィール画像">
+        <img class="profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $user->profile_image) }}" alt="プロフィール画像">
         @else
         <!-- プロフィール画像がない場合のアイコン表示 -->
         <i class="fas fa-user fa-5x profile-icon"></i>

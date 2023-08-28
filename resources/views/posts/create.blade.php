@@ -23,7 +23,7 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
 
             <!-- プロフィール画像がある場合は表示、なければユーザーアイコンを表示 -->
             @if(Auth::user()->profile_image)
-            <img class="card-header-profile" src="{{ asset('storage/profile_images/' . Auth::user()->profile_image) }}" alt="User's Profile Image" class="profile-image">
+            <img class="card-header-profile" src="{{ Storage::disk('s3')->url('profile_images/' . Auth::user()->profile_image) }}" alt="User's Profile Image" class="profile-image">
             @else
             <i class="fas fa-user fa-5x card-header-profile-icon"></i>
             @endif

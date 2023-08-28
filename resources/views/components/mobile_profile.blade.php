@@ -6,7 +6,7 @@
 
         <!-- ユーザーのプロフィール画像が存在する場合 -->
         @if($user->profile_image)
-        <img class="mobile-profile-image rounded-circle" src="{{ asset('storage/profile_images/' . $user->profile_image) }}" alt="プロフィール画像">
+        <img class="mobile-profile-image rounded-circle" src="{{ Storage::disk('s3')->url('profile_images/' . $user->profile_image) }}" alt="プロフィール画像">
         @else
 
         <!-- ユーザーのプロフィール画像が存在しない場合のデフォルトアイコン -->

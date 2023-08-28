@@ -19,7 +19,7 @@
     <div class="carousel-inner">
         @foreach($post->images as $index => $image)
         <div class="carousel-item {{ $index == 0 ? 'active' : '' }} modal-image-container">
-            <img class="modal-image" src="{{ asset('storage/' . $image->file_path) }}" class="d-block w-100" alt="投稿画像">
+            <img class="modal-image" src="{{ Storage::disk('s3')->url($image->file_path) }}" class="d-block w-100" alt="投稿画像">
         </div>
         @endforeach
     </div>

@@ -47,7 +47,7 @@ $selectedLabels = $post->labels->pluck('name')->toArray();
                             @foreach($post->images as $image)
                             <div class="col-4 mb-3">
                                 <div class="edit-post-image-container">
-                                    <img class="card-img-top" style="border-radius: 0;" src="{{ asset('storage/' . $image->file_path) }}" alt="投稿画像" id="editImage{{ $post->id }}">
+                                    <img class="card-img-top" style="border-radius: 0;" src="{{ Storage::disk('s3')->url($image->file_path) }}" alt="投稿画像" id="editImage{{ $post->id }}">
                                 </div>
                             </div>
                             @endforeach

@@ -25,7 +25,7 @@
 
                         <!-- ユーザープロフィール画像の表示 -->
                         @if($post->user->profile_image)
-                        <img class="modal-profile-image" src="{{ asset('storage/profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
+                        <img class="modal-profile-image" src="{{ Storage::disk('s3')->url(profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
                         @else
 
                         <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
@@ -88,7 +88,7 @@
                     <div class="carousel-inner">
                         @foreach($post->images as $index => $image)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }} modal-image-container">
-                            <img class="modal-image" src="{{ asset('storage/' . $image->file_path) }}" class="d-block w-100" alt="投稿画像">
+                            <img class="modal-image" src="{{ Storage::disk('s3')->url($image->file_path) }}" class="d-block w-100" alt="投稿画像">
                         </div>
                         @endforeach
                     </div>
