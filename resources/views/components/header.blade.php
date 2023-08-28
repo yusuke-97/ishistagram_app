@@ -74,7 +74,7 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         <div class="d-flex align-items-center">
                             @if(Auth::user()->profile_image)
-                            <img class="header-profile" src="{{ asset('storage/profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
+                            <img class="header-profile" src="{{ Storage::disk('s3')->url('profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
                             @else
                             <i class="fas fa-user fa-lg header-profile-icon"></i>
                             @endif
