@@ -45,7 +45,7 @@
                         </button>
 
                         <a class="btn btn-link mt-3 d-flex justify-content-center ishistagram-login-text" style="font-size: 80%;" href="{{ route('password.request') }}">
-                            パスワードを忘れた場合はこちら
+                            パスワードを忘れた場合
                         </a>
                     </div>
                 </form>
