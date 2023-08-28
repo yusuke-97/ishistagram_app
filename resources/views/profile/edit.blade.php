@@ -35,7 +35,7 @@
                             <label for="profile_image" style="font-weight: bold;">プロフィール画像</label>
                             <div class="d-flex align-items-center mb-2">
                                 @if ($user->profile_image)
-                                <img class="edit-profile-image" id="currentProfileImage" src="{{ asset('storage/profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像" width="100">
+                                <img class="edit-profile-image" id="currentProfileImage" src="{{ Storage::disk('s3')->url('profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像" width="100">
                                 @else
                                 <i class="fas fa-user fa-2x edit-profile-icon"></i>
                                 @endif
