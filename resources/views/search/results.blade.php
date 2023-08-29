@@ -15,7 +15,7 @@
         <div class="col-4 ishistagram-post-container">
 
             <!-- 投稿の詳細表示用モーダルをインクルード -->
-            @include('modals.post_result')
+            @include('modals.show_post')
 
             <!-- 画像をクリックすると投稿詳細モーダルが表示されるエリア -->
             <div class="ishistagram-image-container" data-bs-toggle="modal" data-bs-target="#showPostModal{{ $post->id }}">
