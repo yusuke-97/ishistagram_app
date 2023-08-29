@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else {
             var img = document.createElement('img');
             img.className = 'profile-image small-profile-image';
-            img.src = '/ishistagram/public/storage/profile_images/' + profileImage;
+            img.src = '/profile_images/' + profileImage;
             imageDiv.appendChild(img);
         }
         userLink.appendChild(imageDiv);
