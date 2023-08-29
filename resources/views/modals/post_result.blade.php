@@ -22,10 +22,10 @@
                 <div class="d-flex align-items-center justify-content-between w-100">
                     <div class="modal-user-info profile-info-spacing">
 
-                        <a href="{{ route('profile.default') }}" style="text-decoration: none; color: inherit;">
+                        <a href="{{ route('profile.index', ['index' => $user->id]) }}" style="text-decoration: none; color: inherit;">
                             <!-- ユーザープロフィール画像の表示 -->
                             @if($post->user->profile_image)
-                            <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
+                            <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
                             @else
 
                             <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
@@ -126,7 +126,7 @@
                     <div class="d-flex align-items-center">
                         <i class="fa-solid fa-reply me-1"></i>
                         <strong style="font-weight: bold;" class="me-2">{{ $comment->user->user_name }}</strong>
-                        <span>{{ $comment->content }}</span>
+                        <span>{!! $post->content !!}</span>
                     </div>
 
                     @if(Auth::id() == $comment->user_id) <!-- 現在のユーザーがコメントの投稿者であるかを確認 -->
