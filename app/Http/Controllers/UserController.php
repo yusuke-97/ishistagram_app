@@ -27,18 +27,13 @@ class UserController extends Controller
         return response()->json($following);
     }
 
-    public function following()
-    {
-        return $this->belongsToMany('App\Models\User', 'follows', 'follower_id', 'followed_id')->withTimestamps();
-    }
-
     public  function follow($id)
     {
-        auth()->user()->following->attach($id);
+        auth()->user()->following()->attach($id);
     }
 
     public  function unfollow($id)
     {
-        auth()->user()->following->dettach($id);
+        auth()->user()->following()->dettach($id);
     }
 }
