@@ -18,6 +18,6 @@ class FollowsController extends Controller
     {
         auth()->user()->following()->detach($user->id);
 
-        return response();
+        return response()->json();
     }
 }
