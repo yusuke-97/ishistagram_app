@@ -9,7 +9,7 @@
         <!-- 現在のルート名に応じてアクティブなリンクを判定する -->
         @php
         $isPostActive = Route::currentRouteNamed('profile.default');
-        $isLabelActive = Route::currentRouteNamed('profile.show');
+        $isLabelActive = Route::currentRouteNamed('profile.show.withLabel');
         @endphp
 
         <!-- 投稿リンク -->
@@ -29,7 +29,11 @@
         <ul class="dropdown-menu" aria-labelledby="labelDropdown">
 
             <!-- 「すべて表示」のリンク -->
-            <li><a class="dropdown-item" href="{{ route('profile.index', ['id' => $user->id]) }}">すべて表示</a></li>
+            @if (Auth::id() === $profile->user->id)
+            <li><a class="dropdown-item" href="{{ route('profile.default') }}">すべて表示</a></li>
+            @else
+            <li><a class="dropdown-item" href="{{ route('profile.show', ['profile' => $user->id]) }}">すべて表示</a></li>
+            @endif
 
             <!-- 各ラベルをループして表示 -->
             @foreach($labels as $label)
