@@ -27,10 +27,10 @@
                         @if (Auth::id() === $post->user->id)
                         <a href="{{ route('profile.default') }}" class="modal-user-info" style="text-decoration: none; color: inherit;">
                             @if($post->user->profile_image)
-                            <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
+                            <img class="modal-profile-image me-3" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
                             @else
                             <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
-                            <i class="fas fa-user fa-2x modal-profile-icon"></i>
+                            <i class="fas fa-user fa-2x modal-profile-icon me-3"></i>
                             @endif
                             <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
                         </a>
