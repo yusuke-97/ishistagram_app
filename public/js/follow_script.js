@@ -85,31 +85,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             followersListDiv.textContent = 'フォロワーがいません';
                         } else {
                             followers.forEach(function(follower) {
-                                var followerDiv = document.createElement('div');
-                                followerDiv.className = 'd-flex align-items-center justify-content-between'; // スタイルを調整
-                                createUserLink(followerDiv, follower);
+                                var urlFollow = '/follows-list';
 
-                                console.log("Processing follower:", follower.user_name);
-                                console.log("Is followed by current user:", follower.is_followed_by_current_user);
-                            
-                                if (follower.is_followed_by_current_user) {
-                                    var unfollowButton = document.createElement('button');
-                                    unfollowButton.className = 'btn btn-danger';
-                                    unfollowButton.textContent = 'フォロー中';
-                                    unfollowButton.addEventListener('click', function() {
-                                        unfollow(follower.id);
-                                    });
-                                    followerDiv.appendChild(unfollowButton);
-                                } else {
-                                    var followButton = document.createElement('button');
-                                    followButton.className = 'btn btn-primary';
-                                    followButton.textContent = 'フォローする';
-                                    followButton.addEventListener('click', function() {
-                                        follow(follower.id);
-                                    });
-                                    followerDiv.appendChild(followButton);
-                                }
-                            
+                                var xhrFollow = new XMLHttpRequest();
+                                xhrFollow.onreadystatechange = function() {
+
+                                    var followerDiv = document.createElement('div');
+                                    followerDiv.className = 'd-flex align-items-center justify-content-between'; // スタイルを調整
+                                    createUserLink(followerDiv, follower);
+
+                                    console.log("Processing follower:", follower.user_name);
+                                    console.log("Is followed by current user:", follower.is_followed_by_current_user);
+                                
+                                    if (follower.is_followed_by_current_user) {
+                                        var unfollowButton = document.createElement('button');
+                                        unfollowButton.className = 'btn btn-danger';
+                                        unfollowButton.textContent = 'フォロー中';
+                                        unfollowButton.addEventListener('click', function() {
+                                            unfollow(follower.id);
+                                        });
+                                        followerDiv.appendChild(unfollowButton);
+                                    } else {
+                                        var followButton = document.createElement('button');
+                                        followButton.className = 'btn btn-primary';
+                                        followButton.textContent = 'フォローする';
+                                        followButton.addEventListener('click', function() {
+                                            follow(follower.id);
+                                        });
+                                        followerDiv.appendChild(followButton);
+                                    }
+                                };
+
+                                xhrFollow.open('GET', urlFollow, true);
+                                xhrFollow.send();
+
                                 followersListDiv.appendChild(followerDiv);
                             });                            
                         }
