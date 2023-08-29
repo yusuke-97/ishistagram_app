@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function unfollow(userId) {
     console.log("unfollow function called with userId:", userId);
     if (window.confirm('フォローを解除しますか？')) {
-        var url = 'https://ishistagram-914f42dea72b.herokuapp.com/unfollow/' + userId;
+        var url = '/unfollow/' + userId;
         console.log("Generated request URL:", url);
         var xhr = new XMLHttpRequest();
 
