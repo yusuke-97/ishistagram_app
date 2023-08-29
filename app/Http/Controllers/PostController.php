@@ -223,7 +223,7 @@ class PostController extends Controller
 
         foreach ($matches[0] as $match) {
             $hashtag = str_replace('#', '', $match);
-            $url = "/ishistagram/public/search/tags?query=" . $hashtag;
+            $url = "/search/tags?query=" . $hashtag;
             $link = '<a href="' . $url . '">' . $match . '</a>';
             $content = str_replace($match, $link, $content);
         }
