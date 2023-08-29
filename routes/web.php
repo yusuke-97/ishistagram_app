@@ -51,8 +51,8 @@ Route::delete('/unfollow/{user}', [UserController::class, 'unfollow'])->name('un
 // Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 Route::resource('/users', UserController::class)->middleware(['auth', 'verified']);
 
-Route::get('/user/{id}/followers', [UserController::class, 'getFollowers']);
-Route::get('/user/{id}/following', [UserController::class, 'getFollowing']);
+Route::get('/user/{id}/followers', [FollowsController::class, 'getFollowers']);
+Route::get('/user/{id}/following', [FollowsController::class, 'getFollowing']);
 
 Route::resource('/labels', LabelController::class)->middleware(['auth', 'verified']);
 
