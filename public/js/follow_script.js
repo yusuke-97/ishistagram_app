@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else {
             var img = document.createElement('img');
             img.className = 'profile-image small-profile-image';
-            img.src = '/profile_images/' + profileImage;
+            img.src = window.followProfileImagesUrl + profileImage;
             imageDiv.appendChild(img);
         }
         userLink.appendChild(imageDiv);
-    
+
         // ユーザー名と名前用のdiv
         var infoDiv = document.createElement('div');
         infoDiv.style.marginLeft = '10px'; // 画像との間にスペースを追加

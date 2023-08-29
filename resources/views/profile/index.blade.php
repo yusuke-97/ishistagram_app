@@ -59,6 +59,11 @@
 
 </div>
 
+<!-- JS変数の定義 -->
+<script>
+    window.profileImagesUrl = "{{ Storage::disk('s3')->url('profile_images/') }}";
+</script>
+
 <!-- JavaScript部分 -->
 <script>
     var userId = "{{ $user->id }}"; // LaravelでユーザーIDを取得
