@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class FollowsController extends Controller
 {
@@ -14,9 +15,11 @@ class FollowsController extends Controller
         return back();
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        auth()->user()->following()->detach($id);
+        Log::info('Entered destroy method with user:', ['user' => $user]);
+
+        auth()->user()->following()->detach($user);
 
         return back();
     }
