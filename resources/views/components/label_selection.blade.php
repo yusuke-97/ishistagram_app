@@ -8,15 +8,29 @@
 
         <!-- 現在のルート名に応じてアクティブなリンクを判定する -->
         @php
+
+        @if (Auth::id() === $user->id)
         $isPostActive = Route::currentRouteNamed('profile.default');
-        $isLabelActive = Route::currentRouteNamed('profile.show.withLabel');
+        @else
+        $isPostActive = Route::currentRouteNamed('profile.show', ['profile' => $user->id]);
+        @endif
+
+        $isLabelActive = Route::currentRouteNamed('profile.show.withLabel', ['profile' => $user->id, 'label' => $label->name]');
+
         @endphp
 
         <!-- 投稿リンク -->
-        <a href="{{ route('profile.index', ['id' => $user->id]) }}" class="me-4 text-decoration-none" style="{{ $isPostActive ? 'font-weight: bold; color: black;' : 'color: gray;' }}">
+        @if (Auth::id() === $user->id)
+        <a href="{{ route('profile.default') }}" class="me-4 text-decoration-none" style="{{ $isPostActive ? 'font-weight: bold; color: black;' : 'color: gray;' }}">
             <i class="fa-solid fa-table-cells me-1" style="{{ $isPostActive ? 'color: black;' : 'color: gray;' }}"></i>
             <span style="font-size: 90%;">投稿</span>
         </a>
+        @else
+        <a href="{{ route('profile.show', ['profile' => $user->id]) }}" class="me-4 text-decoration-none" style="{{ $isPostActive ? 'font-weight: bold; color: black;' : 'color: gray;' }}">
+            <i class="fa-solid fa-table-cells me-1" style="{{ $isPostActive ? 'color: black;' : 'color: gray;' }}"></i>
+            <span style="font-size: 90%;">投稿</span>
+        </a>
+        @endif
 
         <!-- ラベル選択 -->
         <a href="#" class="text-decoration-none me-2" role="button" id="labelDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="{{ $isLabelActive ? 'font-weight: bold; color: black;' : 'color: gray;' }}">
