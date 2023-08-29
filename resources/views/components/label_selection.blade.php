@@ -7,16 +7,22 @@
     <div class="d-flex justify-content-center">
 
         <!-- 現在のルート名に応じてアクティブなリンクを判定する -->
-        @php
-
         @if (Auth::id() === $user->id)
+
+        @php
         $isPostActive = Route::currentRouteNamed('profile.default');
+        @endphp
+
         @else
+
+        @php
         $isPostActive = Route::currentRouteNamed('profile.show', ['profile' => $user->id]);
+        @endphp
+
         @endif
 
+        @php
         $isLabelActive = Route::currentRouteNamed('profile.show.withLabel', ['profile' => $user->id, 'label' => $label->name]');
-
         @endphp
 
         <!-- 投稿リンク -->
