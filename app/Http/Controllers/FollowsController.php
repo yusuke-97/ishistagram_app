@@ -11,13 +11,13 @@ class FollowsController extends Controller
     {
         auth()->user()->following()->attach($user->id);
 
-        return response()->json();
+        return response();
     }
 
     public function destroy(User $user)
     {
         auth()->user()->following()->detach($user->id);
 
-        return response()->json();
+        return response();
     }
 }
