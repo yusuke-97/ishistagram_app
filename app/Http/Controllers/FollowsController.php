@@ -7,16 +7,16 @@ use App\Models\User;
 
 class FollowsController extends Controller
 {
-    public function store(User $user)
+    public function store($id)
     {
-        auth()->user()->following()->attach($user->id);
+        auth()->user()->following()->attach($id);
 
         return back();
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        auth()->user()->following()->detach($user->id);
+        auth()->user()->following()->detach($id);
 
         return back();
     }
