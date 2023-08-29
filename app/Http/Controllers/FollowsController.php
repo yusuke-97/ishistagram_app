@@ -33,6 +33,8 @@ class FollowsController extends Controller
             return $followerArray;
         });
 
+        dd($followersWithStatus);
+
         return response()->json($followersWithStatus);
     }
 }
