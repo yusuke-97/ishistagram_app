@@ -180,8 +180,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // フォロー解除機能
 function unfollow(userId) {
+    console.log("unfollow function called with userId:", userId);
     if (window.confirm('フォローを解除しますか？')) {
         var url = '/unfollow/' + userId;
+        console.log("Generated request URL:", url);
         var xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function() {
