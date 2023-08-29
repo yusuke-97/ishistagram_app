@@ -11,7 +11,7 @@ class FollowsController extends Controller
     {
         auth()->user()->following()->attach($user->id);
 
-        return response()->json();
+        return back();
     }
 
     public function destroy(User $user)
