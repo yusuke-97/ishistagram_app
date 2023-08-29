@@ -6,6 +6,6 @@
         @else
         <i class="fas fa-user fa-5x card-header-profile-icon"></i>
         @endif
-        <span style="font-weight: bold;">{{ Auth::user()->user_name }}</span>
+        <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
     </a>
 </div>
