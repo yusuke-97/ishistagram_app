@@ -188,6 +188,9 @@ function unfollow(userId) {
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response.message, "for user:", response.targetUserId); // ここでサーバーからのレスポンスをコンソールに表示
+                
                 alert('フォローを解除しました');
                 location.reload();
             }
