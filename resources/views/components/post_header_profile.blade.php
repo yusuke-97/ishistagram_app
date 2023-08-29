@@ -7,6 +7,7 @@
         @else
         <i class="fas fa-user fa-5x card-header-profile-icon"></i>
         @endif
+        <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
     </a>
     @else
     <a href="{{ route('profile.show', ['profile' => $post->user->id]) }}" style="text-decoration: none; color: inherit;">
@@ -15,7 +16,7 @@
         @else
         <i class="fas fa-user fa-5x card-header-profile-icon"></i>
         @endif
+        <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
     </a>
     @endif
-    <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
 </div>
