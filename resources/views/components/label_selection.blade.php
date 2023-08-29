@@ -29,7 +29,7 @@
         <ul class="dropdown-menu" aria-labelledby="labelDropdown">
 
             <!-- 「すべて表示」のリンク -->
-            @if (Auth::id() === $profile->user->id)
+            @if (Auth::id() === $user->id)
             <li><a class="dropdown-item" href="{{ route('profile.default') }}">すべて表示</a></li>
             @else
             <li><a class="dropdown-item" href="{{ route('profile.show', ['profile' => $user->id]) }}">すべて表示</a></li>
