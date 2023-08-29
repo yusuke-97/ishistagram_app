@@ -46,42 +46,40 @@
             <div class="modal-body">
 
                 <!-- 投稿画像のカルーセル -->
-                <div id="postImagesCarousel{{ $post->id }}" class="carousel slide" data-wrap="false" data-interval="false" data-id="{{ $post->id }}">
+                <div id="postImagesCarousel{{ $post->id }}" class="carousel slide" data-wrap="false" data-interval="false">
 
                     <!-- ドットを表示する部分 -->
                     @if(count($post->images) > 1)
                     <ol class="carousel-indicators">
                         @foreach($post->images as $index => $image)
-                        <li data-target="#postImagesCarousel{{ $post->id }}" data-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                        <li data-target="#postImagesCarousel{{ $post->id }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
                         @endforeach
                     </ol>
                     @endif
+
+                    @php
+                    $firstImageIndex = 1;
+                    $lastImageIndex = count($post->images);
+                    @endphp
 
                     <!-- 投稿画像の表示部分 -->
                     <div class="carousel-inner">
                         @foreach($post->images as $index => $image)
                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }} modal-image-container">
-                            <img class="modal-image" src="{{ Storage::disk('s3')->url($image->file_path) }}" alt="投稿画像">
+                            <img class="modal-image" src="{{ Storage::disk('s3')->url($image->file_path) }}" class="d-block w-100" alt="投稿画像">
                         </div>
                         @endforeach
                     </div>
-                    @php
-                    $firstImageIndex = 1; // 最初の画像のインデックス
-                    $lastImageIndex = count($post->images); // 最後の画像のインデックスを取得
-                    @endphp
 
                     <!-- カルーセルの操作ボタン（左右） -->
-                    @if(count($post->images) > 1)
-                    <a class="carousel-control-prev" href="#postImagesCarousel{{ $post->id }}" role="button" data-slide="prev">
-                        <i class="fa-solid fa-circle-chevron-left"></i>
-                        <span class="sr-only">前へ</span>
-                    </a>
-
-                    <a class="carousel-control-next" href="#postImagesCarousel{{ $post->id }}" role="button" data-slide="next">
-                        <i class="fa-solid fa-circle-chevron-right"></i>
-                        <span class="sr-only">次へ</span>
-                    </a>
-                    @endif
+                    <button class="carousel-control-prev" type="button" data-bs-target="#postImagesCarousel{{ $post->id }}" data-bs-slide="prev">
+                        <i class="fa-solid fa-circle-chevron-left" style="color: black;"></i>
+                        <span class="visually-hidden">前へ</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#postImagesCarousel{{ $post->id }}" data-bs-slide="next">
+                        <i class="fa-solid fa-circle-chevron-right" style="color: black;"></i>
+                        <span class="visually-hidden">次へ</span>
+                    </button>
                 </div>
 
                 <!-- いいねボタンとコメントボタン -->
