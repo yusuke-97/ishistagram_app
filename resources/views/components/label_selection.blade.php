@@ -33,7 +33,7 @@
 
             <!-- 各ラベルをループして表示 -->
             @foreach($labels as $label)
-            <li><a class="dropdown-item" href="{{ route('profile.show', ['profile' => $user->id, 'label' => $label->name]) }}">{{ $label->name }}</a></li>
+            <li><a class="dropdown-item" href="{{ route('profile.show.withLabel', ['profile' => $user->id, 'label' => $label->name]) }}">{{ $label->name }}</a></li>
             @endforeach
 
         </ul>
