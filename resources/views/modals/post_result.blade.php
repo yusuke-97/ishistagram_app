@@ -22,7 +22,7 @@
                 <div class="d-flex align-items-center justify-content-between w-100">
                     <div class="modal-user-info profile-info-spacing">
 
-                        <a href="{{ route('profile.index', ['index' => $user->id]) }}" style="text-decoration: none; color: inherit;">
+                        <a href="{{ route('profile.index', ['index' => $post->user->id]) }}" style="text-decoration: none; color: inherit;">
                             <!-- ユーザープロフィール画像の表示 -->
                             @if($post->user->profile_image)
                             <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
