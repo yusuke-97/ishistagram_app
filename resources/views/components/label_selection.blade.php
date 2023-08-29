@@ -22,7 +22,7 @@
         @endif
 
         @php
-        $isLabelActive = Route::currentRouteNamed('profile.show.withLabel', ['profile' => $user->id, 'label' => $label->name]');
+        $isLabelActive = Route::currentRouteNamed('profile.show.withLabel', ['profile' => $user->id, 'label' => $label->name]);
         @endphp
 
         <!-- 投稿リンク -->
