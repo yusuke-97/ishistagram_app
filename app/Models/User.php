@@ -70,18 +70,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Like::class);
     }
 
-    public function follows()
+    public function following()
     {
         return $this->belongsToMany('App\Models\User', 'follows', 'follower_id', 'followed_id')->withTimestamps();
     }
 
-    // public function following() {
-    //     return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id')->withTimestamps();
-    // }
-
-    // public function followers() {
-    //     return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id')->withTimestamps();
-    // }
+    public function followers()
+    {
+        return $this->belongsToMany('App\Models\User', 'follows', 'followed_id', 'follower_id')->withTimestamps();
+    }
 
     public function isFollowing(User $user)
     {
