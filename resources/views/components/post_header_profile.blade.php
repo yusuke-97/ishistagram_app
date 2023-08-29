@@ -1,6 +1,6 @@
 <!-- 投稿のヘッダープロフィール -->
 <div class="card-header">
-    <a href="{{ route('profile.show') }}" style="text-decoration: none; color: inherit;">
+    <a href="{{ route('profile.show', ['profile' => $post->user->id]) }}" style="text-decoration: none; color: inherit;">
         @if($post->user->profile_image)
         <img class="card-header-profile" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="User's Profile Image">
         @else
