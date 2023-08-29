@@ -8,7 +8,6 @@
 
         <!-- 現在のルート名に応じてアクティブなリンクを判定する -->
         @if (Auth::id() === $user->id)
-
         @php
         $isPostActive = Route::currentRouteNamed('profile.default');
         @endphp
@@ -18,12 +17,13 @@
         @php
         $isPostActive = Route::currentRouteNamed('profile.show', ['profile' => $user->id]);
         @endphp
-
         @endif
 
+        @foreach($labels as $label)
         @php
         $isLabelActive = Route::currentRouteNamed('profile.show.withLabel', ['profile' => $user->id, 'label' => $label->name]);
         @endphp
+        @endforeach
 
         <!-- 投稿リンク -->
         @if (Auth::id() === $user->id)
