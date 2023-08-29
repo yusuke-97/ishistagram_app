@@ -10,14 +10,14 @@ class FollowsController extends Controller
 {
     public function store($userId)
     {
-        auth()->user()->following->attach($userId);
+        auth()->user()->following->$userId->save();
 
         return back();
     }
 
     public function destroy($userId)
     {
-        auth()->user()->following->detach($userId);
+        auth()->user()->following->$userId->delete();
 
         return back();
     }
