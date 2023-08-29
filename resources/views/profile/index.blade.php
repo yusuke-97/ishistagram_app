@@ -61,7 +61,7 @@
 
 <!-- JS変数の定義 -->
 <script>
-    window.profileImagesUrl = "{{ Storage::disk('s3')->url('profile_images/') }}";
+    window.followProfileImagesUrl = "{{ Storage::disk('s3')->url('profile_images/') }}";
 </script>
 
 <!-- JavaScript部分 -->
