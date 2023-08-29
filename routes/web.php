@@ -45,8 +45,8 @@ Route::get('profile', [ProfileController::class, 'show'])->name('profile.default
 
 
 Route::resource('/likes', LikeController::class)->middleware(['auth', 'verified']);
-Route::post('follow/{user}', [FollowsController::class, 'store'])->name('follow');
-Route::delete('/unfollow/{user}', [FollowsController::class, 'destroy'])->name('unfollow');
+Route::post('follow/{user}', [UserController::class, 'follow'])->name('follow');
+Route::delete('/unfollow/{user}', [UserController::class, 'unfollow'])->name('unfollow');
 
 // Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 Route::resource('/users', UserController::class)->middleware(['auth', 'verified']);
