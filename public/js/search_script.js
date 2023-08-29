@@ -41,7 +41,7 @@ $(document).ready(function() {
                     } else {
                         let profileImageDiv = $("<div class='profile-image-container'></div>");
                         if (result.profile_image) {
-                            profileImageDiv.append($("<img class='autocomplete-profile-image' src='/ishistagram/storage/app/public/profile_images/" + result.profile_image + "' alt='profile image'>"));
+                            profileImageDiv.append($("<img class='autocomplete-profile-image' src='" + {{ Storage::disk('s3')->url('profile_images/') }}" + result.profile_image + "' alt='profile image'>"));
                         } else {
                             profileImageDiv.append($("<i class='fas fa-user autocomplete-profile-icon'></i>"));
                         }
