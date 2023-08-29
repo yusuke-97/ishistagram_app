@@ -21,11 +21,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="d-flex align-items-center justify-content-between w-100">
-                    <div class="modal-user-info profile-info-spacing">
+                    <div class="profile-info-spacing">
 
                         <!-- ユーザープロフィール画像の表示 -->
                         @if (Auth::id() === $post->user->id)
-                        <a href="{{ route('profile.default') }}" style="text-decoration: none; color: inherit;">
+                        <a href="{{ route('profile.default') }}" class="modal-user-info" style="text-decoration: none; color: inherit;">
                             @if($post->user->profile_image)
                             <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
                             @else
