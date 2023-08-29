@@ -86,10 +86,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         } else {
                             followers.forEach(function(follower) {
                                 var followerDiv = document.createElement('div');
-                                followerDiv.className = 'd-flex align-items-center';
+                                followerDiv.className = 'd-flex align-items-center justify-content-between'; // スタイルを調整
                                 createUserLink(followerDiv, follower);
+                            
+                                if (follower.is_followed_by_current_user) {
+                                    var unfollowButton = document.createElement('button');
+                                    unfollowButton.className = 'btn btn-danger';
+                                    unfollowButton.textContent = 'フォロー中';
+                                    unfollowButton.addEventListener('click', function() {
+                                        unfollow(follower.id);
+                                    });
+                                    followerDiv.appendChild(unfollowButton);
+                                } else {
+                                    var followButton = document.createElement('button');
+                                    followButton.className = 'btn btn-primary';
+                                    followButton.textContent = 'フォローする';
+                                    followButton.addEventListener('click', function() {
+                                        follow(follower.id);
+                                    });
+                                    followerDiv.appendChild(followButton);
+                                }
+                            
                                 followersListDiv.appendChild(followerDiv);
-                            });
+                            });                            
                         }
 
                         var modalElem = document.getElementById('followersModal' + userId);
@@ -178,6 +197,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+function follow(userId) {
+    console.log("follow function called with userId:", userId);
+    var url = '/follow/' + userId;
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            alert('フォローしました');
+            location.reload();
+        }
+    };
+
+    xhr.open('POST', url, true);
+
+    // CSRF トークンの追加
+    var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    xhr.setRequestHeader('X-CSRF-TOKEN', token);
+
+    xhr.send();
+}
+
+
 // フォロー解除機能
 function unfollow(userId) {
     console.log("unfollow function called with userId:", userId);
@@ -190,7 +232,7 @@ function unfollow(userId) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
                 console.log(response.message, "for user:", response.targetUserId); // ここでサーバーからのレスポンスをコンソールに表示
-                
+
                 alert('フォローを解除しました');
                 location.reload();
             }
