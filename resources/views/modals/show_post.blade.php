@@ -45,9 +45,6 @@
                             <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
                         </a>
                         @endif
-
-                        <!-- ユーザーネームを表示 -->
-                        <p class="modal-user">{{ $post->user->user_name }}</p> <!-- ユーザーネームを表示 -->
                     </div>
 
                     <!-- ︙ボタンとドロップダウンメニュー -->
