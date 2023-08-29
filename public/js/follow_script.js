@@ -88,6 +88,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 var followerDiv = document.createElement('div');
                                 followerDiv.className = 'd-flex align-items-center justify-content-between'; // スタイルを調整
                                 createUserLink(followerDiv, follower);
+
+                                console.log("Processing follower:", follower);
                             
                                 if (follower.is_followed_by_current_user) {
                                     var unfollowButton = document.createElement('button');
