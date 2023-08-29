@@ -560,6 +560,7 @@ main {
     color: #ffffff; /* アイコンの色を白に設定 */
     background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
     font-size: 30px;
+    margin-right: 0;
 }
 
 .dropdown {
