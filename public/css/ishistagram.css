@@ -539,7 +539,6 @@ main {
 .modal-user-info {
     display: flex;
     align-items: center; /* 要素を縦方向の中央に配置 */
-    gap: 10px;
 }
 
 .modal-profile-image {
