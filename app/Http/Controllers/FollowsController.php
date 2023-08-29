@@ -8,18 +8,16 @@ use Illuminate\Support\Facades\Log;
 
 class FollowsController extends Controller
 {
-    public function store($id)
+    public function store($userId)
     {
-        auth()->user()->following()->attach($id);
+        auth()->user()->following->attach($userId);
 
         return back();
     }
 
-    public function destroy(User $user)
+    public function destroy($userId)
     {
-        Log::info('Entered destroy method with user:', ['user' => $user]);
-
-        auth()->user()->following()->detach($user);
+        auth()->user()->following->detach($userId);
 
         return back();
     }

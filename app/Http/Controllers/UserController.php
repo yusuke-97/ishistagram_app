@@ -26,14 +26,4 @@ class UserController extends Controller
         $following = $user->following;
         return response()->json($following);
     }
-
-    public  function follow($id)
-    {
-        auth()->user()->following()->attach($id);
-    }
-
-    public  function unfollow($id)
-    {
-        auth()->user()->following()->dettach($id);
-    }
 }
