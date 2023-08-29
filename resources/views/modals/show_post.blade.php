@@ -24,12 +24,26 @@
                     <div class="modal-user-info profile-info-spacing">
 
                         <!-- ユーザープロフィール画像の表示 -->
-                        @if($post->user->profile_image)
-                        <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . Auth::user()->profile_image) }}" alt="プロフィール画像">
+                        @if (Auth::id() === $post->user->id)
+                        <a href="{{ route('profile.default') }}" style="text-decoration: none; color: inherit;">
+                            @if($post->user->profile_image)
+                            <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
+                            @else
+                            <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
+                            <i class="fas fa-user fa-2x modal-profile-icon"></i>
+                            @endif
+                            <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
+                        </a>
                         @else
-
-                        <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
-                        <i class="fas fa-user fa-2x modal-profile-icon"></i> <!-- プロフィール画像がない場合の代替表示 -->
+                        <a href="{{ route('profile.show', ['profile' => $post->user->id]) }}" style="text-decoration: none; color: inherit;">
+                            @if($post->user->profile_image)
+                            <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
+                            @else
+                            <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
+                            <i class="fas fa-user fa-2x modal-profile-icon"></i>
+                            @endif
+                            <span style="font-weight: bold;">{{ $post->user->user_name }}</span>
+                        </a>
                         @endif
 
                         <!-- ユーザーネームを表示 -->
