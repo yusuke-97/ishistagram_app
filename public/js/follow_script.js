@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 } else {
                                     var followButton = document.createElement('button');
                                     followButton.className = 'btn btn-primary';
-                                    followButton.textContent = 'フォローする';
+                                    followButton.textContent = 'フォロー解除';
                                     followButton.addEventListener('click', function() {
                                         follow(follower.id);
                                     });
