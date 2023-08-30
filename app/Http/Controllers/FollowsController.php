@@ -21,4 +21,18 @@ class FollowsController extends Controller
 
         return response()->json();
     }
+
+    public function follow(User $user)
+    {
+        auth()->user()->following()->attach($user->id);
+
+        return back();
+    }
+
+    public function unfollow(User $user)
+    {
+        auth()->user()->following()->detach($user->id);
+
+        return back();
+    }
 }
