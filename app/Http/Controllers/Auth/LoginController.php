@@ -36,7 +36,7 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect('/login'); // ここでログインページにリダイレクトするよう指定
+        return $this->loggedOut($request) ?: redirect('/'); // ここでログインページにリダイレクトするよう指定
     }
 
     /**
