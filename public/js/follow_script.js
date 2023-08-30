@@ -163,6 +163,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         unfollow(follow.id);
                                     });
                                     followDiv.appendChild(unfollowButton);
+                                }else {
+                                    var followButton = document.createElement('button');
+                                    followButton.className = 'btn btn-primary';
+                                    followButton.textContent = 'フォローする';
+                                    followButton.addEventListener('click', function() {
+                                        follow(follower.id);
+                                    });
+                                    followerDiv.appendChild(followButton);
                                 }
                                 followingListDiv.appendChild(followDiv);
                             });
