@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         unfollowButton.className = 'btn btn-danger';
                                         unfollowButton.textContent = 'フォロー解除';
                                         unfollowButton.addEventListener('click', function() {
-                                            unfollow(follower.id);
+                                            unfollowUser(follower.id);
                                         });
                                         followerDiv.appendChild(unfollowButton);
                                     } else {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         followButton.className = 'btn btn-primary';
                                         followButton.textContent = 'フォローする';
                                         followButton.addEventListener('click', function() {
-                                            follow(follower.id);
+                                            followUser(follower.id);
                                         });
                                         followerDiv.appendChild(followButton);
                                     }
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         unfollowButton.className = 'btn btn-danger';
                                         unfollowButton.textContent = 'フォロー解除';
                                         unfollowButton.addEventListener('click', function() {
-                                            unfollow(follow.id);
+                                            unfollowUser(follow.id);
                                         });
                                         followDiv.appendChild(unfollowButton);
                                     } else {
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         followButton.className = 'btn btn-primary';
                                         followButton.textContent = 'フォローする';
                                         followButton.addEventListener('click', function() {
-                                            follow(follow.id);
+                                            followUser(follow.id);
                                         });
                                         followDiv.appendChild(followButton);
                                     }
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-function follow(userId) {
+function followUser(userId) {
     var url = '/follow/' + userId;
     var xhr = new XMLHttpRequest();
 
@@ -232,7 +232,7 @@ function follow(userId) {
 
 
 // フォロー解除機能
-function unfollow(userId) {
+function unfollowUser(userId) {
     if (window.confirm('フォローを解除しますか？')) {
         var url = '/unfollow/' + userId;
         var xhr = new XMLHttpRequest();
