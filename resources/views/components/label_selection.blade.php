@@ -67,7 +67,7 @@
 
     <!-- 現在選択されているラベル名を表示するセクション -->
     @php
-    $currentLabel = request()->get('label'); // URLの'label'クエリからラベル名を取得
+    $currentLabel = $label;
     @endphp
 
     <p class="mt-3 mb-0 text-center" style="font-weight: bold;">
