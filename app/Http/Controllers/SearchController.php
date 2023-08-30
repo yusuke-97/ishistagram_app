@@ -16,7 +16,7 @@ class SearchController extends Controller
 
         // クエリが#で始まっている場合、#を除去
         if (strpos($query, '#') === 0) {
-            // $query = substr($query, 1);
+            $query = substr($query, 1);
         } else {
             $isUsernameSearch = true;
         }

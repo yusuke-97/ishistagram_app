@@ -10,6 +10,11 @@
     <h1>#{{ $query }}の検索結果</h1>
     @endif
 
+    <script>
+        console.log('Is Username Search:', @json($isUsernameSearch));
+    </script>
+
+
     <!-- 投稿が存在する場合の処理 -->
     @if($posts->count())
     <div class="row justify-content-start">
