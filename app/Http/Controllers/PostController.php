@@ -93,10 +93,9 @@ class PostController extends Controller
         }
 
         // 投稿に関連付けられているラベルを取得
-        $labels = $post->labels;
-        $labelIds = $labels->pluck('id')->toArray(); // 投稿に関連するラベルIDの配列を取得
+        $labels = Label::all();
 
-        return view('posts.edit', compact('post', 'labels', 'labelIds'));
+        return view('posts.edit', compact('post', 'labels'));
     }
 
     // 更新機能

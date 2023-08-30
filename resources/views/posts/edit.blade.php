@@ -69,7 +69,7 @@ $selectedLabels = $post->labels->pluck('name')->toArray();
                             <div id="labelsList" class="mt-2">
 
                                 <!-- チェックボックスでラベルを表示 -->
-                                @foreach($allLabels as $label)
+                                @foreach($labels as $label)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="{{ $label }}" id="label-{{ $loop->index }}" name="labels[]" {{ in_array($label, $selectedLabels) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="label-{{ $loop->index }}">
