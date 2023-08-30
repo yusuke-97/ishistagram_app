@@ -28,7 +28,7 @@
             <!-- プロフィール編集リンク -->
             <a href="{{ route('profile.edit', ['profile' => $user->id]) }}" title="プロフィールを編集" class="profile-link" style="color: black; text-decoration: none; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">
                 <i class="fa-solid fa-gear"></i>
-                プロフィールを編集
+                <span style="font-weight: bold;">プロフィールを編集</span>
             </a>
             @else
 
