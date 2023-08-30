@@ -63,13 +63,6 @@ class PostController extends Controller
             }
         }
 
-        // ラベルの処理
-        foreach ($labelNames as $labelName) {
-            // 既存のラベルを探すか、新しいラベルを作成
-            $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);
-            $post->labels()->attach($label->id); // ラベルIDを指定して紐づけ
-        }
-
         // 投稿内容からハッシュタグを抽出
         preg_match_all('/#([\p{L}\p{Mn}\p{Pd}0-9_]+)/u', $request->input('content'), $tags);
         $tags = $tags[1];
