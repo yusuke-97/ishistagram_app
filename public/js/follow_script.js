@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     var userId = window.userId;
-    console.log("Raw Auth ID:", "{{ Auth::id() }}");
-    window.loggedInUserId = parseInt("{{ Auth::id() }}");
+    console.log("Raw Auth ID:", window.loggedInUserId);
+    window.loggedInUserId = parseInt(window.loggedInUserId);
     console.log("Parsed Auth ID:", window.loggedInUserId);
 
     // クローズボタンのイベントハンドラを外部に定義
