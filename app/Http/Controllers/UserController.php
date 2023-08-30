@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -15,9 +16,18 @@ class UserController extends Controller
 
     public function getFollowers($id)
     {
+        $currentUser = Auth::user(); // ログイン中のユーザーを取得
+
         $user = User::find($id);
         $followers = $user->followers;
-        return response()->json($followers);
+
+        $followersWithStatus = $followers->map(function ($follower) use ($currentUser) {
+            $followerArray = $follower->toArray();
+            $followerArray['is_followed_by_current_user'] = $currentUser->isFollowing($follower);
+            return $followerArray;
+        });
+
+        return response()->json($followersWithStatus);
     }
 
     public function getFollowing($id)
