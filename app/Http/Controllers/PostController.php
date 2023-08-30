@@ -130,7 +130,7 @@ class PostController extends Controller
         }
 
         foreach ($labelNames as $labelName) {
-            $label = Label::firstOrCreate(['name' => $labelName]);  // ラベルが存在しなければ作成
+            $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);  // user_idもセット
             $post->labels()->attach($label->id);  // 投稿とラベルを関連付け
         }
 
