@@ -36,9 +36,9 @@ class SearchController extends Controller
     {
         $query = $request->query('query');
         // クエリの最初の文字が#であれば削除
-        if (substr($query, 0, 1) === '#') {
-            $query = substr($query, 1);
-        }
+        // if (substr($query, 0, 1) === '#') {
+        //     $query = substr($query, 1);
+        // }
 
         // タグ名が$queryで始まり、かつ、関連する投稿が存在するもののみを検索
         $tags = Tag::where('name', 'like', $query . '%')
