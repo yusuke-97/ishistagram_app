@@ -149,10 +149,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             followingListDiv.textContent = 'フォローしていません';
                         } else {
                             following.forEach(function(follow) {
-                                var followDiv = document.createElement('div');
-                                followDiv.className = 'd-flex align-items-center justify-content-between';
+                                var followingDiv = document.createElement('div');
+                                followingDiv.className = 'd-flex align-items-center justify-content-between';
 
-                                createUserLink(followDiv, follow);
+                                createUserLink(followignDiv, follow);
 
                                 // フォロー解除ボタンの追加
                                 if (following.id !== window.loggedInUserId) {
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                     unfollowButton.className = 'btn btn-danger';
                                     unfollowButton.textContent = 'フォロー解除';
                                     unfollowButton.addEventListener('click', function() {
-                                        unfollow(follow.id);
+                                        unfollow(following.id);
                                     });
                                     followingDiv.appendChild(unfollowButton);
                                 }else {
