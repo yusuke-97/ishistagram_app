@@ -148,7 +148,6 @@ class ProfileController extends Controller
 
         // $requestからlabelの値を取得
         $label = $request->input('label');
-        dd($label);
 
         // ユーザーの投稿にのみ紐づいているラベルを取得
         $labels = Label::whereHas('posts', function ($query) use ($user) {
