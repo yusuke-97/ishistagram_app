@@ -26,12 +26,75 @@ class PostController extends Controller
     }
 
     // 作成ページ
+    // public function create()
+    // {
+    //     return view('posts.create');
+    // }
+
     public function create()
     {
-        return view('posts.create');
+        // 現在のユーザーの全ての投稿に関連付けられているラベルを取得
+        $labels = Label::whereHas('posts', function ($query) {
+            $query->whereIn('posts.id', Auth::user()->posts->pluck('id')->toArray());
+        })->get();
+
+        return view('posts.create', compact('labels'));
     }
 
     // 作成機能
+    // public function store(Request $request)
+    // {
+    //     // バリデーションの設定
+    //     $request->validate([
+    //         'image' => 'required',
+    //         'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+    //         'content' => 'required|max:255',
+    //     ]);
+
+    //     // ラベルの数を確認
+    //     $labelNames = explode(',', $request->input('labels'));
+    //     if (count($labelNames) > 2) {
+    //         return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
+    //     }
+
+    //     $post = new Post();
+    //     $post->content = $request->input('content');
+    //     $post->user_id = Auth::id();
+    //     $post->save();
+
+    //     // 複数ファイルを保存し、保存先のパスを取得
+    //     if ($files = $request->file('image')) {
+    //         foreach ($files as $file) {
+    //             $path = Storage::disk('s3')->put('post_images', $file, 'public');
+    //             // 保存先のパスをImageモデルに設定
+    //             $image = new Image();
+    //             $image->file_path = $path;
+    //             $image->post_id = $post->id;
+    //             $image->save();
+    //         }
+    //     }
+
+    //     // ラベルの処理
+    //     foreach ($labelNames as $labelName) {
+    //         // 既存のラベルを探すか、新しいラベルを作成
+    //         $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);
+    //         $post->labels()->attach($label->id); // ラベルIDを指定して紐づけ
+    //     }
+
+    //     // 投稿内容からハッシュタグを抽出
+    //     preg_match_all('/#([\p{L}\p{Mn}\p{Pd}0-9_]+)/u', $request->input('content'), $tags);
+    //     $tags = $tags[1];
+
+    //     // タグを保存または取得し、投稿と関連付け
+    //     foreach ($tags as $tagName) {
+    //         $tag = Tag::firstOrCreate(['name' => $tagName]);
+    //         $post->tags()->attach($tag->id);
+    //     }
+
+    //     return redirect()->route('posts.index', compact('post'))->with('flash_message', '投稿が完了しました。');
+    // }
+
+
     public function store(Request $request)
     {
         // バリデーションの設定
@@ -40,12 +103,6 @@ class PostController extends Controller
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'content' => 'required|max:255',
         ]);
-
-        // ラベルの数を確認
-        $labelNames = explode(',', $request->input('labels'));
-        if (count($labelNames) > 2) {
-            return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
-        }
 
         $post = new Post();
         $post->content = $request->input('content');
@@ -65,10 +122,11 @@ class PostController extends Controller
         }
 
         // ラベルの処理
-        foreach ($labelNames as $labelName) {
-            // 既存のラベルを探すか、新しいラベルを作成
-            $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);
-            $post->labels()->attach($label->id); // ラベルIDを指定して紐づけ
+        $labelsInput = $request->input('labels', []);  // 配列として受け取る
+        $labelNames = is_string($labelsInput) ? explode(',', $labelsInput) : $labelsInput;
+
+        if (count($labelNames) > 2) {
+            return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
         }
 
         // 投稿内容からハッシュタグを抽出
