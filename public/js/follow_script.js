@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     var userId = window.userId;
+    window.loggedInUserId = "{{ Auth::id() }}"; // Laravelでログイン中のユーザーIDを取得
 
     // クローズボタンのイベントハンドラを外部に定義
     function handleCloseButtonClick(modal) {
