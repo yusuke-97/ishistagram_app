@@ -137,7 +137,7 @@ class ProfileController extends Controller
         return redirect()->route('profile.default')->with('flash_message', 'プロフィールを更新しました。');
     }
 
-    public function showLabel(Request $request, $profile = null)
+    public function showLabel(Request $request, $profile = null, $label = null)
     {
         // デフォルトのルートの場合、ログインユーザーを使用
         if ($profile === null) {
@@ -145,9 +145,6 @@ class ProfileController extends Controller
         } else {
             $user = User::findOrFail($profile);
         }
-
-        // $requestからlabelの値を取得
-        $label = $request->input('label');
 
         // ユーザーの投稿にのみ紐づいているラベルを取得
         $labels = Label::whereHas('posts', function ($query) use ($user) {
