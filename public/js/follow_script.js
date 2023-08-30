@@ -155,24 +155,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 createUserLink(followDiv, follow);
 
                                 // フォロー解除ボタンの追加
-                                if (follow.id !== window.loggedInUserId) {
+                                if (following.id !== window.loggedInUserId) {
                                     var unfollowButton = document.createElement('button');
                                     unfollowButton.className = 'btn btn-danger';
                                     unfollowButton.textContent = 'フォロー解除';
                                     unfollowButton.addEventListener('click', function() {
                                         unfollow(follow.id);
                                     });
-                                    followDiv.appendChild(unfollowButton);
+                                    followingDiv.appendChild(unfollowButton);
                                 }else {
                                     var followButton = document.createElement('button');
                                     followButton.className = 'btn btn-primary';
                                     followButton.textContent = 'フォローする';
                                     followButton.addEventListener('click', function() {
-                                        follow(follower.id);
+                                        follow(following.id);
                                     });
-                                    followerDiv.appendChild(followButton);
+                                    followingDiv.appendChild(followButton);
                                 }
-                                followingListDiv.appendChild(followDiv);
+                                followingListDiv.appendChild(followingDiv);
                             });
                         }
 
