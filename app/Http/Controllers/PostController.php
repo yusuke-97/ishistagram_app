@@ -129,6 +129,11 @@ class PostController extends Controller
             return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
         }
 
+        foreach ($labelNames as $labelName) {
+            $label = Label::firstOrCreate(['name' => $labelName]);  // ラベルが存在しなければ作成
+            $post->labels()->attach($label->id);  // 投稿とラベルを関連付け
+        }
+
         // 投稿内容からハッシュタグを抽出
         preg_match_all('/#([\p{L}\p{Mn}\p{Pd}0-9_]+)/u', $request->input('content'), $tags);
         $tags = $tags[1];
