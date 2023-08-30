@@ -3,6 +3,9 @@
 @push('scripts')
 <!-- 投稿に関するJavaScriptの読み込み -->
 <script src="{{ asset('/js/post_script.js') }}"></script>
+
+<!-- ラベル編集に関するJavaScriptの読み込み -->
+<script src="{{ asset('js/label_edit.js') }}"></script>
 @endpush
 
 <?php
@@ -64,33 +67,33 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
                     <label for="content" style="font-weight: bold;">投稿文</label>
                     <textarea name="content" id="content" class="form-control" value="{{ old('content') }}" rows="5"></textarea>
                 </div>
+
+                <!-- ラベルの作成領域 -->
                 <div class="form-group mb-4">
-
-                    <!-- ラベル作成用のモーダル -->
-                    @include('modals.create_labels', ['labels' => $allLabels])
-
-                    <!-- ラベル編集ボタン -->
-                    <button type="button" class="btn add-label-btn" data-bs-toggle="modal" data-bs-target="#labelModal">
-                        <i class="fa-regular fa-folder"></i> ラベルを編集
-                    </button>
+                    <label class="form-label" style="font-weight: bold;">ラベル</label>
                     <span>※ 最大2個まで</span>
+                    @if ($errors->has('labels'))
+                    <span class="text-danger">{{ $errors->first('labels') }}</span>
+                    @endif
+                    <input type="text" id="labelInput" class="form-control" placeholder="ラベルを入力してください" autocomplete="off">
+                    <div id="labelsList" class="mt-2">
 
-                    <!-- 選択されたラベルを保存するための隠しフィールド -->
-                    <input type="hidden" name="labels" id="hiddenLabels" value="">
-
-                    <!-- 選択されたラベルの表示エリア -->
-                    <div id="selectedLabels" class="mt-2 mb-4">
-                        @foreach($selectedLabels as $label)
-                        @if(in_array($label, $allLabels))
-                        <div class="selected-label-item">
-                            <span>{{ $label }}</span>
-                            <!-- ラベル削除ボタンを追加できるスペース -->
+                        <!-- チェックボックスでラベルを表示 -->
+                        @foreach($labels as $label)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $label->name }}" id="label-{{ $loop->index }}" name="labels[]" {{ in_array($label->name, $selectedLabels) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="label-{{ $loop->index }}">
+                                {{ $label->name }}
+                            </label>
                         </div>
-                        @endif
                         @endforeach
                     </div>
 
+                    <!-- ラベル追加ボタン -->
+                    <button type="button" class="btn mt-2 add-label-btn" id="addLabel">ラベル追加</button>
                 </div>
+
+
 
                 <!-- シェアボタン -->
                 <button type="submit" class="btn share-btn">
