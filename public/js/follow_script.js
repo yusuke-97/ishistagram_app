@@ -92,7 +92,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 console.log("Processing follower:", follower.user_name);
                                 console.log("Is followed by current user:", follower.is_followed_by_current_user);
 
-                                console.log("follower.id:", follower.id);
+                                console.log("follower.id type:", typeof follower.id);
+                                console.log("window.loggedInUserId type:", typeof window.loggedInUserId);
                                 
                                 if (follower.id !== window.loggedInUserId) {
                                     if (follower.is_followed_by_current_user) {
