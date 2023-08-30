@@ -11,7 +11,8 @@ class SearchController extends Controller
 {
     public function searchTags(Request $request)
     {
-        $query = $request->query('query');
+        $originalQuery = $request->query('query');
+        $query = $originalQuery;
         $isUsernameSearch = false;
 
         // クエリが#で始まっている場合、#を除去
@@ -29,16 +30,16 @@ class SearchController extends Controller
         })->get();
 
         // 検索結果をビューに渡す
-        return view('search.results', compact('posts', 'query', 'isUsernameSearch'));
+        return view('search.results', compact('posts', 'originalQuery', 'isUsernameSearch'));
     }
 
     public function autocompleteTags(Request $request)
     {
         $query = $request->query('query');
         // クエリの最初の文字が#であれば削除
-        // if (substr($query, 0, 1) === '#') {
-        //     $query = substr($query, 1);
-        // }
+        if (substr($query, 0, 1) === '#') {
+            $query = substr($query, 1);
+        }
 
         // タグ名が$queryで始まり、かつ、関連する投稿が存在するもののみを検索
         $tags = Tag::where('name', 'like', $query . '%')
