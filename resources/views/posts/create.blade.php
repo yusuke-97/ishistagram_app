@@ -92,7 +92,7 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
                     </div>
 
                     <!-- ラベル追加ボタン -->
-                    <div>
+                    <div class="display: flex">
                         <button type="button" class="btn mt-2 add-label-btn" id="addLabel">ラベル追加</button>
                         <span>※ 最大2個まで</span>
                     </div>
