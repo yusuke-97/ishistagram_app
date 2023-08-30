@@ -72,12 +72,14 @@ class ProfileController extends Controller
             $posts = $user->posts()->whereHas('labels', function ($query) use ($label) {
                 $query->where('name', $label);
             })->with('images')->orderBy('created_at', 'desc')->get();
+            $currentLabelName = $label;
         } else {
             // すべての投稿を取得
             $posts = $user->posts()->with('images')->orderBy('created_at', 'desc')->get();
+            $currentLabelName = 'すべてを表示';
         }
 
-        return view('profile.index', compact('user', 'posts', 'labels', 'label'));
+        return view('profile.index', compact('user', 'posts', 'labels', 'label', 'currentLabelName'));
     }
 
     /**
@@ -153,11 +155,13 @@ class ProfileController extends Controller
             $posts = $user->posts()->whereHas('labels', function ($query) use ($label) {
                 $query->where('name', $label);
             })->with('images')->orderBy('created_at', 'desc')->get();
+            $currentLabelName = $label;
         } else {
             // すべての投稿を取得
             $posts = $user->posts()->with('images')->orderBy('created_at', 'desc')->get();
+            $currentLabelName = 'すべてを表示';
         }
 
-        return view('profile.index', compact('user', 'posts', 'labels', 'label'));
+        return view('profile.index', compact('user', 'posts', 'labels', 'label', 'currentLabelName'));
     }
 }
