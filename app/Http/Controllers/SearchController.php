@@ -11,8 +11,7 @@ class SearchController extends Controller
 {
     public function searchTags(Request $request)
     {
-        $originalQuery = $request->query('query');
-        $query = $originalQuery;
+        $query = $request->query('query');
         $isUsernameSearch = false;
 
         // クエリが#で始まっている場合、#を除去
@@ -28,9 +27,6 @@ class SearchController extends Controller
         $posts = Post::whereHas('tags', function ($q) use ($tags) {
             $q->whereIn('tags.id', $tags->pluck('id'));
         })->get();
-
-        // オリジナルのクエリをセッションに保存
-        session(['originalQuery' => $originalQuery]);
 
         // 検索結果をビューに渡す
         return view('search.results', compact('posts', 'query', 'isUsernameSearch'));
@@ -49,11 +45,6 @@ class SearchController extends Controller
         $tags = Tag::where('name', 'like', $query . '%')
             ->whereHas('posts')
             ->get();
-
-        // タグの名前に#を追加する
-        foreach ($tags as $tag) {
-            $tag->name = '#' . $tag->name;
-        }
 
         return response()->json($tags);
     }
