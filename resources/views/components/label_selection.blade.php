@@ -78,7 +78,7 @@
         @endif
 
         <!-- 現在選択されているラベル名、または「すべてを表示」テキストを表示 -->
-        <span style="font-size: 90%;">{{ isset($currentLabel) && !empty($currentLabel) ? $currentLabel : 'すべてを表示' }}</span>
+        <span style="font-size: 90%;">{{ isset($currentLabel) && !empty($currentLabel) ? $currentLabel->name : 'すべてを表示' }}</span>
     </p>
 </div>
 
