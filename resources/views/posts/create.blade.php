@@ -67,7 +67,7 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
 
                 <!-- 投稿文の入力エリア -->
                 <div class="form-group mb-4">
-                    <label for="content" class="mt-2" style="font-weight: bold;">投稿文</label>
+                    <label for="content" class="mb-2" style="font-weight: bold;">投稿文</label>
                     <textarea name="content" id="content" class="form-control" value="{{ old('content') }}" rows="5"></textarea>
                 </div>
 
