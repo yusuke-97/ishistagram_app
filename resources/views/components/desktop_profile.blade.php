@@ -36,13 +36,20 @@
             @if (auth()->user()->isFollowing($user))
 
             <!-- フォロー解除ボタン -->
-            <button data-follow-button="{{ $user->id }}" onclick="unfollow({{ $user->id }})" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォロー中</button>
+            <form action="{{ route('unfollow.profile', ['user' => $user->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォロー中</button>
+            </form>
+
             @else
 
             <!-- フォローボタン -->
-            <button data-follow-button="{{ $user->id }}" onclick="follow({{ $user->id }})" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォローする</button>
+            <form action="{{ route('follow.profile', ['user' => $user->id]) }}" method="POST">
+                @csrf
+                <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォローする</button>
+            </form>
             @endif
-
             @endif
         </div>
 
@@ -56,7 +63,7 @@
 
             <!-- フォロワー数 -->
             <a href="#" id="show-followers" data-bs-toggle="modal" data-bs-target="#followersModal{{ $user->id }}" style="color: black; text-decoration: none;">
-                フォロワー <strong data-follower-count="{{ $user->id }}">{{ $user->followers->count() }}</strong>人
+                フォロワー <strong>{{ $user->followers->count() }}</strong>人
             </a>
 
             <!-- 投稿数表示 -->

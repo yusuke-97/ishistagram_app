@@ -205,25 +205,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-
-
-function toggleFollowButton(isFollowing, userId) {
-    var followButton = document.querySelector('[data-follow-button="'+ userId +'"]');
-    if (isFollowing) {
-        followButton.innerText = 'フォロー中';
-        followButton.setAttribute('onclick', 'unfollow(' + userId + ')');
-    } else {
-        followButton.innerText = 'フォローする';
-        followButton.setAttribute('onclick', 'follow(' + userId + ')');
-    }
-}
-
-function updateFollowerCount(userId, count) {
-    var followerCount = document.querySelector('[data-follower-count="'+ userId +'"]');
-    followerCount.innerText = count;
-}
-
-// フォローする機能
 function follow(userId) {
     var url = '/follow/' + userId;
     var xhr = new XMLHttpRequest();
@@ -231,8 +212,8 @@ function follow(userId) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
-            toggleFollowButton(true, userId);
-            updateFollowerCount(userId, response.followerCount);
+            alert('フォローしました');
+            location.reload();
         }
     };
 
@@ -255,8 +236,10 @@ function unfollow(userId) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
-                toggleFollowButton(false, userId);
-                updateFollowerCount(userId, response.followerCount);
+                console.log(response.message, "for user:", response.targetUserId); // ここでサーバーからのレスポンスをコンソールに表示
+
+                alert('フォローを解除しました');
+                location.reload();
             }
         };
 
