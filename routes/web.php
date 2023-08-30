@@ -34,7 +34,7 @@ Route::prefix('profile')->group(function () {
 Route::get('/profile/index', [ProfileController::class, 'index'])->name('profile.index')->middleware(['auth', 'verified']);
 
 // ラベルによるフィルタリングをサポートする既存のルート
-Route::get('profile/{profile}/show/{label?}', [ProfileController::class, 'show'])->name('profile.show.withLabel')->middleware(['auth', 'verified']);
+Route::get('profile/{profile}/show/{label?}', [ProfileController::class, 'showLabel'])->name('profile.show.withLabel')->middleware(['auth', 'verified']);
 
 // 他の `profile` に関するルーティング
 Route::resource('profile', ProfileController::class)->parameters([

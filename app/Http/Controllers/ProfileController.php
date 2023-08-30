@@ -137,14 +137,33 @@ class ProfileController extends Controller
         return redirect()->route('profile.default')->with('flash_message', 'プロフィールを更新しました。');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
+    public function showLabel(Request $request, $profile = null)
     {
-        //
+        // デフォルトのルートの場合、ログインユーザーを使用
+        if ($profile === null) {
+            $user = Auth::user();
+        } else {
+            $user = User::findOrFail($profile);
+        }
+
+        // $requestからlabelの値を取得
+        $label = $request->input('label');
+
+        // ユーザーの投稿にのみ紐づいているラベルを取得
+        $labels = Label::whereHas('posts', function ($query) use ($user) {
+            $query->whereIn('posts.id', $user->posts->pluck('id')->toArray());
+        })->get();
+
+        if ($label) {
+            // 選択されたラベルを持つ投稿を取得
+            $posts = $user->posts()->whereHas('labels', function ($query) use ($label) {
+                $query->where('name', $label);
+            })->with('images')->orderBy('created_at', 'desc')->get();
+        } else {
+            // すべての投稿を取得
+            $posts = $user->posts()->with('images')->orderBy('created_at', 'desc')->get();
+        }
+
+        return view('profile.index', compact('user', 'posts', 'labels', 'label'));
     }
 }
