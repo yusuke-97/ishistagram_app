@@ -71,7 +71,7 @@ document.getElementById('updateButton').addEventListener('click', function() {
     
     uncheckedLabels.forEach(label => {
         $.ajax({
-            url: '/ishistagram/public/labels',  // 他の投稿で使用されているか確認するエンドポイント
+            url: '/labels',  // 他の投稿で使用されているか確認するエンドポイント
             method: 'GET',
             data: { label: label.value },
             success: function(isUsed) {
