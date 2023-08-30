@@ -46,12 +46,6 @@ class PostController extends Controller
             'content' => 'required|max:255',
         ]);
 
-        // ラベルの数を確認
-        $labelNames = explode(',', $request->input('labels'));
-        if (count($labelNames) > 2) {
-            return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
-        }
-
         $post = new Post();
         $post->content = $request->input('content');
         $post->user_id = Auth::id();
