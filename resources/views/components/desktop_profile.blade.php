@@ -36,7 +36,7 @@
             @if (auth()->user()->isFollowing($user))
 
             <!-- フォロー解除ボタン -->
-            <form action="{{ route('unfollow.profile') }}" method="POST">
+            <form action="{{ route('unfollow.profile', ['user' => $user]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォロー中</button>
@@ -45,7 +45,7 @@
             @else
 
             <!-- フォローボタン -->
-            <form action="{{ route('follow.profile') }}" method="POST">
+            <form action="{{ route('follow.profile', ['user' => $user]) }}" method="POST">
                 @csrf
                 <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォローする</button>
             </form>
