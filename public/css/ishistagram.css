@@ -233,6 +233,17 @@ main {
 
 /* 一覧画面 */
 /* プロフィール */
+.btn-following {
+    background-color: lightgray;
+    border-color: lightgray;
+}
+
+.btn-follow {
+    background-color: lightgreen;
+    border-color: lightgreen;
+}
+
+
 .profile-icon {
     width: 150px;
     height: 150px;

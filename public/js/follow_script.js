@@ -92,15 +92,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 if (follower.id !== window.loggedInUserId) {
                                     if (follower.is_followed_by_current_user) {
                                         var unfollowButton = document.createElement('button');
-                                        unfollowButton.className = 'btn btn-danger';
-                                        unfollowButton.textContent = 'フォロー解除';
+                                        unfollowButton.className = 'btn btn-danger btn-following';
+                                        unfollowButton.textContent = 'フォロー中';
                                         unfollowButton.addEventListener('click', function() {
                                             unfollowUser(follower.id);
                                         });
                                         followerDiv.appendChild(unfollowButton);
                                     } else {
                                         var followButton = document.createElement('button');
-                                        followButton.className = 'btn btn-primary';
+                                        followButton.className = 'btn btn-primary btn-follow';
                                         followButton.textContent = 'フォローする';
                                         followButton.addEventListener('click', function() {
                                             followUser(follower.id);
@@ -160,15 +160,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 if (follow.id !== window.loggedInUserId) {
                                     if (follow.is_followed_by_current_user) { 
                                         var unfollowButton = document.createElement('button');
-                                        unfollowButton.className = 'btn btn-danger';
-                                        unfollowButton.textContent = 'フォロー解除';
+                                        unfollowButton.className = 'btn btn-danger btn-following';
+                                        unfollowButton.textContent = 'フォロー中';
                                         unfollowButton.addEventListener('click', function() {
                                             unfollowUser(follow.id);
                                         });
                                         followDiv.appendChild(unfollowButton);
                                     } else {
                                         var followButton = document.createElement('button');
-                                        followButton.className = 'btn btn-primary';
+                                        followButton.className = 'btn btn-primary btn-follow';
                                         followButton.textContent = 'フォローする';
                                         followButton.addEventListener('click', function() {
                                             followUser(follow.id);
