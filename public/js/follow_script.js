@@ -212,7 +212,6 @@ function follow(userId) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
             alert('フォローしました');
-            location.reload();
         }
     };
 
@@ -238,7 +237,6 @@ function unfollow(userId) {
                 console.log(response.message, "for user:", response.targetUserId); // ここでサーバーからのレスポンスをコンソールに表示
 
                 alert('フォローを解除しました');
-                location.reload();
             }
         };
 
