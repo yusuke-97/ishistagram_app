@@ -6,7 +6,6 @@ body {
 }
 
 body, html {
-    height: 100%;
     overflow-x: hidden; /* 横方向のスクロールを防ぐため */
 }
 
@@ -21,11 +20,6 @@ main {
 
 .modal {
     z-index: 2000; /* この値は状況に応じて調整してください */
-}
-
-.card-body {
-    max-height: calc(100vh - 100px); /* 100pxはヘッダーやフッターなどの他の要素の高さを考慮して調整してください */
-    overflow-y: auto;
 }
 
 
