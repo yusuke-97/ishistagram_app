@@ -66,7 +66,7 @@
 
             <!-- ログイン中のユーザーがこのユーザーをフォローしている場合 -->
             @if (auth()->user()->isFollowing($user))
-            <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
+            <form action="{{ route('unfollow.profile', ['user' => $user->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォロー中</button>
@@ -74,7 +74,7 @@
 
             <!-- フォローしていない場合 -->
             @else
-            <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST">
+            <form action="{{ route('follow.profile', ['user' => $user->id]) }}" method="POST">
                 @csrf
                 <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォローする</button>
             </form>
