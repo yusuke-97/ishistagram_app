@@ -29,9 +29,13 @@ class SearchController extends Controller
             $q->whereIn('tags.id', $tags->pluck('id'));
         })->get();
 
+        // オリジナルのクエリをセッションに保存
+        session(['originalQuery' => $originalQuery]);
+
         // 検索結果をビューに渡す
-        return view('search.results', compact('posts', 'originalQuery', 'isUsernameSearch'));
+        return view('search.results', compact('posts', 'query', 'isUsernameSearch'));
     }
+
 
     public function autocompleteTags(Request $request)
     {
