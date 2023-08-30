@@ -19,6 +19,10 @@
         @endphp
         @endif
 
+        @php
+        $isLabelActive = false;
+        @endphp
+
         @foreach($labels as $label)
         @php
         $isLabelActive = Route::currentRouteNamed('profile.show.withLabel', ['profile' => $user->id, 'label' => $label->name]);
