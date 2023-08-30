@@ -56,7 +56,7 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
                 <!-- 画像選択ボタン -->
                 <div class="form-group mb-3">
                     <input type="file" name="image[]" id="image" class="form-control" multiple style="display: none;">
-                    <button id="customButton" class="btn select-image-btn">
+                    <button id="customButton" class="btn select-image-btn me-3">
                         <i class="fa-regular fa-image"></i> 画像を選択
                     </button>
                     <span>※ 最大5枚まで</span>
@@ -93,7 +93,7 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
 
                     <!-- ラベル追加ボタン -->
                     <div class="mt-2" style="display: flex; align-items: center;">
-                        <button type="button" class="btn add-label-btn" id="addLabel">ラベル追加</button>
+                        <button type="button" class="btn add-label-btn me-3" id="addLabel">ラベル追加</button>
                         <span>※ 最大2個まで</span>
                     </div>
                 </div>
