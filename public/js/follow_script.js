@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         unfollowButton.className = 'btn btn-danger';
                                         unfollowButton.textContent = 'フォロー解除';
                                         unfollowButton.addEventListener('click', function() {
-                                            unfollow(following.id);
+                                            unfollow(follow.id);
                                         });
                                         followDiv.appendChild(unfollowButton);
                                     } else {
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                         followButton.className = 'btn btn-primary';
                                         followButton.textContent = 'フォローする';
                                         followButton.addEventListener('click', function() {
-                                            follow(following.id);
+                                            follow(follow.id);
                                         });
                                         followDiv.appendChild(followButton);
                                     }
