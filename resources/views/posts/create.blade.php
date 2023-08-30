@@ -3,9 +3,6 @@
 @push('scripts')
 <!-- 投稿に関するJavaScriptの読み込み -->
 <script src="{{ asset('/js/post_script.js') }}"></script>
-
-<!-- Sortable.jsの読み込み -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 @endpush
 
 <?php
