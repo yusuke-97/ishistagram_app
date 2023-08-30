@@ -1,11 +1,11 @@
 <!-- 投稿画像のカルーセル表示 -->
-<div id="postCarousel" class="carousel slide" data-wrap="false" data-interval="false">
+<div id="postCarousel{{ $post->id }}" class="carousel slide" data-wrap="false" data-interval="false">
 
     <!-- カルーセルのドットナビゲーションを表示 -->
     @if(count($post->images) > 1)
     <ol class="carousel-indicators">
         @foreach($post->images as $index => $image)
-        <li data-target="#postCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+        <li data-target="#postCarousel{{ $post->id }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
         @endforeach
     </ol>
     @endif
@@ -25,11 +25,11 @@
     </div>
 
     <!-- カルーセルのコントロール(前後ボタン)を表示 -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#postCarousel{{ $post->id }}" data-bs-slide="prev">
         <i class="fa-solid fa-circle-chevron-left" style="color: black;"></i>
         <span class="visually-hidden">前へ</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#postCarousel{{ $post->id }}" data-bs-slide="next">
         <i class="fa-solid fa-circle-chevron-right" style="color: black;"></i>
         <span class="visually-hidden">次へ</span>
     </button>
