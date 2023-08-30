@@ -236,11 +236,13 @@ main {
 .btn-following {
     background-color: lightgray;
     border-color: lightgray;
+    color: black;
 }
 
 .btn-follow {
     background-color: lightgreen;
     border-color: lightgreen;
+    color: black;
 }
 
 

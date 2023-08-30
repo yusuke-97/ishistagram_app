@@ -69,14 +69,14 @@
             <form action="{{ route('unfollow.profile', ['user' => $user->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォロー中</button>
+                <button type="submit" class="profile-link btn-following" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォロー中</button>
             </form>
 
             <!-- フォローしていない場合 -->
             @else
             <form action="{{ route('follow.profile', ['user' => $user->id]) }}" method="POST">
                 @csrf
-                <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォローする</button>
+                <button type="submit" class="profile-link btn-follow" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォローする</button>
             </form>
             @endif
             @endif
