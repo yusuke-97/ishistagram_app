@@ -28,7 +28,12 @@ class PostController extends Controller
     // 作成ページ
     public function create()
     {
-        return view('posts.create');
+        // 現在のユーザーの全ての投稿に関連付けられているラベルを取得
+        $labels = Label::whereHas('posts', function ($query) {
+            $query->whereIn('posts.id', Auth::user()->posts->pluck('id')->toArray());
+        })->get();
+
+        return view('posts.create', compact('labels'));
     }
 
     // 作成機能
