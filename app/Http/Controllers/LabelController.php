@@ -16,7 +16,10 @@ class LabelController extends Controller
     public function index()
     {
         // 現在のユーザーが過去に作成したラベルを取得（削除済みを除く）
-        $labels = Label::where('user_id', Auth::id())->get();
+        // $labels = Label::where('user_id', Auth::id())->get();
+        $labels = Label::whereHas('posts', function ($query) {
+            $query->whereIn('posts.id', Auth::user()->posts->pluck('id')->toArray());
+        })->get();
 
         // ラベルの名前のみを抽出
         $labelNames = $labels->pluck('name');
