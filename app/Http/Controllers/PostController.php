@@ -92,8 +92,10 @@ class PostController extends Controller
             return redirect()->back()->with('error', '権限がありません。');
         }
 
-        // 現在のユーザーが関連付けたラベルを取得
-        $labels = Label::where('user_id', Auth::id())->get();
+        // 編集する投稿に紐づいているラベルのみを取得
+        $labels = Label::whereHas('posts', function ($query) use ($post) {
+            $query->where('posts.id', $post->id);
+        })->get();
 
         return view('posts.edit', compact('post', 'labels'));
     }
