@@ -50,6 +50,11 @@ class SearchController extends Controller
             ->whereHas('posts')
             ->get();
 
+        // タグの名前に#を追加する
+        foreach ($tags as $tag) {
+            $tag->name = '#' . $tag->name;
+        }
+
         return response()->json($tags);
     }
 
