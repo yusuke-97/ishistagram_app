@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     var userId = window.userId;
-    window.loggedInUserId = parseInt("{{ Auth::id() }}"); // Laravelでログイン中のユーザーIDを取得
+    console.log("Raw Auth ID:", "{{ Auth::id() }}");
+    window.loggedInUserId = parseInt("{{ Auth::id() }}");
+    console.log("Parsed Auth ID:", window.loggedInUserId);
 
     // クローズボタンのイベントハンドラを外部に定義
     function handleCloseButtonClick(modal) {
