@@ -6,6 +6,9 @@
 
 <!-- Sortable.jsの読み込み -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+
+<!-- ラベル関連のJavaScript -->
+<script src="{{ asset('js/label_script.js') }}"></script>
 @endpush
 
 <?php
@@ -102,6 +105,3 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
     </div>
 </div>
 @endsection
-
-<!-- ラベル関連のJavaScript -->
-<script src="{{ asset('js/label_script.js') }}"></script>
