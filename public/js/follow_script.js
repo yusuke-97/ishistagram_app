@@ -149,6 +149,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             followingListDiv.textContent = 'フォローしていません';
                         } else {
                             following.forEach(function(follow) {
+                                console.log("ID:", follow.id, ", Name:", follow.name);
+                                
                                 var followingDiv = document.createElement('div');
                                 followingDiv.className = 'd-flex align-items-center justify-content-between';
 
