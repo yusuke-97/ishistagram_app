@@ -67,6 +67,7 @@
 <!-- JavaScript部分 -->
 <script>
     var userId = "{{ $user->id }}"; // LaravelでユーザーIDを取得
+    window.loggedInUserId = "{{ Auth::id() }}"; // Laravelでログイン中のユーザーIDを取得
 </script>
 <script src="{{ asset('js/follow_script.js') }}"></script>
 <script>
