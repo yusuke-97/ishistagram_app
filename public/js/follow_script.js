@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 var followingDiv = document.createElement('div');
                                 followingDiv.className = 'd-flex align-items-center justify-content-between';
 
-                                createUserLink(followignDiv, follow);
+                                createUserLink(followingDiv, follow);
 
                                 // フォロー解除ボタンの追加
                                 if (following.id !== window.loggedInUserId) {
