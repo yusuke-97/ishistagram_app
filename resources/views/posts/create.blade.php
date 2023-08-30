@@ -67,7 +67,7 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
 
                 <!-- 投稿文の入力エリア -->
                 <div class="form-group mb-4">
-                    <label for="content" style="font-weight: bold;">投稿文</label>
+                    <label for="content" class="mt-2" style="font-weight: bold;">投稿文</label>
                     <textarea name="content" id="content" class="form-control" value="{{ old('content') }}" rows="5"></textarea>
                 </div>
 
@@ -92,7 +92,10 @@ $selectedLabels = old('labels') ? explode(',', old('labels')) : [];
                     </div>
 
                     <!-- ラベル追加ボタン -->
-                    <button type="button" class="btn mt-2 add-label-btn" id="addLabel">ラベル追加</button>
+                    <div>
+                        <button type="button" class="btn mt-2 add-label-btn" id="addLabel">ラベル追加</button>
+                        <span>※ 最大2個まで</span>
+                    </div>
                 </div>
 
                 <!-- シェアボタン -->
