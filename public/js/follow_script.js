@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             followers.forEach(function(follower) {
                                 var followerDiv = document.createElement('div');
                                 followerDiv.className = 'd-flex align-items-center justify-content-between';
+                                followerDiv.style.marginBottom = '16px';
                                 createUserLink(followerDiv, follower);
                                 
                                 if (follower.id !== window.loggedInUserId) {
@@ -151,6 +152,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                             following.forEach(function(follow) {
                                 var followDiv = document.createElement('div');
                                 followDiv.className = 'd-flex align-items-center justify-content-between';
+                                followDiv.style.marginBottom = '16px';
 
                                 createUserLink(followDiv, follow);
 
