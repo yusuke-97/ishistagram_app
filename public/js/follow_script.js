@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                                 // フォロー解除ボタンの追加
                                 if (following.id !== window.loggedInUserId) {
-                                    if (follow.is_followed_by_current_user) { 
+                                    if (following.is_followed_by_current_user) { 
                                         var unfollowButton = document.createElement('button');
                                         unfollowButton.className = 'btn btn-danger';
                                         unfollowButton.textContent = 'フォロー解除';
