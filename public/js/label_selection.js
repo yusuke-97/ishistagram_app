@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
+    var labelLinks = document.querySelectorAll('.dropdown-menu .dropdown-item');
+
+    labelLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            // クリックされたラベル名のテキストを取得
+            var selectedLabelName = event.currentTarget.textContent;
+            
+            // コンソールに表示
+            console.log('選択されたラベル名:', selectedLabelName);
+        });
+    });
 
     // ラベル選択のトリガーを取得
     var labelDropdownTrigger = document.getElementById('labelDropdown');
