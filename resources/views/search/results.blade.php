@@ -5,9 +5,9 @@
 
     <!-- 検索クエリに基づくヘッダタイトル -->
     @if(isset($isUsernameSearch) && $isUsernameSearch)
-    <h1>{{ $query }}の検索結果</h1>
+    <h1>{{ $originalQuery }}の検索結果</h1>
     @else
-    <h1>{{ Str::startsWith($query, '#') ? '' : '#' }}{{ $query }}の検索結果</h1>
+    <h1>{{ Str::startsWith($originalQuery, '#') ? '' : '#' }}{{ $originalQuery }}の検索結果</h1>
     @endif
 
     <!-- 投稿が存在する場合の処理 -->
