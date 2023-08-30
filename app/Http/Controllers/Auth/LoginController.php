@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile/posts';
+    protected $redirectTo = '/profile';
 
 
     public function logout(Request $request)
