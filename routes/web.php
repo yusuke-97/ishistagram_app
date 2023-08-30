@@ -47,15 +47,15 @@ Route::get('profile', [ProfileController::class, 'show'])->name('profile.default
 Route::resource('/likes', LikeController::class)->middleware(['auth', 'verified']);
 Route::post('follow/{user}', [FollowsController::class, 'store'])->name('follow');
 Route::delete('unfollow/{user}', [FollowsController::class, 'destroy'])->name('unfollow');
-Route::post('follow', [FollowsController::class, 'follow'])->name('follow.profile');
-Route::delete('unfollow', [FollowsController::class, 'unfollow'])->name('unfollow.profile');
+Route::post('follow/{id}/followers', [FollowsController::class, 'follow'])->name('follow.profile');
+Route::delete('unfollow/{id}/followers', [FollowsController::class, 'unfollow'])->name('unfollow.profile');
 
 
 // Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 Route::resource('/users', UserController::class)->middleware(['auth', 'verified']);
 
-Route::get('/user/{id}/followers', [UserController::class, 'getFollowers']);
-Route::get('/user/{id}/following', [UserController::class, 'getFollowing']);
+Route::get('/user/{user}/followers', [UserController::class, 'getFollowers']);
+Route::get('/user/{user}/following', [UserController::class, 'getFollowing']);
 
 Route::resource('/labels', LabelController::class)->middleware(['auth', 'verified']);
 
