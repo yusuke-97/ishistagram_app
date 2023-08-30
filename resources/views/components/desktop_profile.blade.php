@@ -41,6 +41,7 @@
                 @method('DELETE')
                 <button type="submit" class="profile-link" style="border: none; color: black; padding: 5px 10px; background-color: #e0e0e0; border-radius: 4px;">フォロー中</button>
             </form>
+
             @else
 
             <!-- フォローボタン -->

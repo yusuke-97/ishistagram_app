@@ -21,20 +21,4 @@ class FollowsController extends Controller
 
         return response()->json();
     }
-
-    public function getFollowersList()
-    {
-        $user = Auth::user(); // ログイン中のユーザーを取得
-        $followers = $user->followers; // フォロワーリストを取得
-
-        $followersWithStatus = $followers->map(function ($follower) use ($user) {
-            $followerArray = $follower->toArray();
-            $followerArray['is_followed_by_current_user'] = $user->isFollowing($follower);
-            return $followerArray;
-        });
-
-        dd($followersWithStatus);
-
-        return response()->json($followersWithStatus);
-    }
 }

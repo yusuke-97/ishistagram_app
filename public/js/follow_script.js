@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     var userId = window.userId;
-    console.log("Raw Auth ID:", window.loggedInUserId);
     window.loggedInUserId = parseInt(window.loggedInUserId);
-    console.log("Parsed Auth ID:", window.loggedInUserId);
 
     // クローズボタンのイベントハンドラを外部に定義
     function handleCloseButtonClick(modal) {
@@ -11,7 +9,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Function to setup modal and close button
     function setupModalAndCloseButton(modalId) {
-        console.log("Setting up modal with ID:", modalId);
         var modal = new bootstrap.Modal(document.getElementById(modalId));
         modal.show();
 
@@ -70,7 +67,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var showFollowersButton = document.getElementById('show-followers');
     if (showFollowersButton) {
         showFollowersButton.addEventListener('click', function(e) {
-            console.log("showFollowersButton clicked");
             e.preventDefault();
 
             var url = '/user/' + userId + '/followers';
@@ -91,12 +87,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 var followerDiv = document.createElement('div');
                                 followerDiv.className = 'd-flex align-items-center justify-content-between';
                                 createUserLink(followerDiv, follower);
-
-                                console.log("Processing follower:", follower.user_name);
-                                console.log("Is followed by current user:", follower.is_followed_by_current_user);
-
-                                console.log("follower.id type:", typeof follower.id);
-                                console.log("window.loggedInUserId type:", typeof window.loggedInUserId);
                                 
                                 if (follower.id !== window.loggedInUserId) {
                                     if (follower.is_followed_by_current_user) {
@@ -143,7 +133,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var showFollowingButton = document.getElementById('show-following');
     if (showFollowingButton) {
         showFollowingButton.addEventListener('click', function(e) {
-            console.log("showFollowingButton clicked");
             e.preventDefault();
 
             var url = '/user/' + userId + '/following';
@@ -181,7 +170,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                         var modalElem = document.getElementById('followingModal' + userId);
                         if (!modalElem) {
-                            console.error('Modal element not found for ID: ', 'followingModal' + userId);
                             return;
                         }
 
@@ -209,7 +197,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function follow(userId) {
-    console.log("follow function called with userId:", userId);
     var url = '/follow/' + userId;
     var xhr = new XMLHttpRequest();
 
@@ -233,10 +220,8 @@ function follow(userId) {
 
 // フォロー解除機能
 function unfollow(userId) {
-    console.log("unfollow function called with userId:", userId);
     if (window.confirm('フォローを解除しますか？')) {
         var url = '/unfollow/' + userId;
-        console.log("Generated request URL:", url);
         var xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function() {
