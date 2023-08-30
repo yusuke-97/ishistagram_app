@@ -12,16 +12,15 @@ class SearchController extends Controller
     public function searchTags(Request $request)
     {
         $query = $request->query('query');
-        $isUsernameSearch = false;
+        $isUsernameSearch = true;
 
         // 以下の行を追加して、$queryの値を確認します。
-        dd($query);
 
         // クエリが#で始まっている場合、#を除去
         if (strpos($query, '#') === 0) {
             $query = substr($query, 1);
         } else {
-            $isUsernameSearch = true;
+            $isUsernameSearch = false;
         }
 
         $tags = Tag::where('name', '=', $query)->get();
