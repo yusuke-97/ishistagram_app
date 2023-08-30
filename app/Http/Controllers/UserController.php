@@ -32,8 +32,17 @@ class UserController extends Controller
 
     public function getFollowing($id)
     {
+        $currentUser = Auth::user(); // ログイン中のユーザーを取得
+
         $user = User::find($id);
         $following = $user->following;
-        return response()->json($following);
+
+        $followingWithStatus = $following->map(function ($follow) use ($currentUser) {
+            $followArray = $follow->toArray();
+            $followArray['is_followed_by_current_user'] = $currentUser->isFollowing($follow);
+            return $followArray;
+        });
+
+        return response()->json($followingWithStatus);
     }
 }
