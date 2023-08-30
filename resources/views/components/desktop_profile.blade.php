@@ -55,8 +55,8 @@
             </a>
 
             <!-- フォロワー数 -->
-            <a href="#" id="show-followers" data-follower-count="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#followersModal{{ $user->id }}" style="color: black; text-decoration: none;">
-                フォロワー <strong>{{ $user->followers->count() }}</strong>人
+            <a href="#" id="show-followers" data-bs-toggle="modal" data-bs-target="#followersModal{{ $user->id }}" style="color: black; text-decoration: none;">
+                フォロワー <strong data-follower-count="{{ $user->id }}">{{ $user->followers->count() }}</strong>人
             </a>
 
             <!-- 投稿数表示 -->
