@@ -15,7 +15,7 @@ class SearchController extends Controller
         $isUsernameSearch = false;
 
         // 以下の行を追加して、$queryの値を確認します。
-        error_log("Query Value: " . $query);
+        dd($query);
 
         // クエリが#で始まっている場合、#を除去
         if (strpos($query, '#') === 0) {
@@ -23,12 +23,6 @@ class SearchController extends Controller
         } else {
             $isUsernameSearch = true;
         }
-
-        // strposの結果を確認します。
-        error_log("Position of #: " . strpos($query, '#'));
-
-        // $isUsernameSearchの値を確認します。
-        error_log("Is Username Search: " . ($isUsernameSearch ? 'true' : 'false'));
 
         $tags = Tag::where('name', '=', $query)->get();
 
