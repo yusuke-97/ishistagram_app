@@ -28,12 +28,7 @@ class PostController extends Controller
     // 作成ページ
     public function create()
     {
-        // 現在のユーザーの全ての投稿に関連付けられているラベルを取得
-        $labels = Label::whereHas('posts', function ($query) {
-            $query->whereIn('posts.id', Auth::user()->posts->pluck('id')->toArray());
-        })->get();
-
-        return view('posts.create', compact('labels'));
+        return view('posts.create');
     }
 
     // 作成機能
@@ -45,6 +40,12 @@ class PostController extends Controller
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'content' => 'required|max:255',
         ]);
+
+        // ラベルの数を確認
+        $labelNames = explode(',', $request->input('labels'));
+        if (count($labelNames) > 2) {
+            return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
+        }
 
         $post = new Post();
         $post->content = $request->input('content');
@@ -61,6 +62,13 @@ class PostController extends Controller
                 $image->post_id = $post->id;
                 $image->save();
             }
+        }
+
+        // ラベルの処理
+        foreach ($labelNames as $labelName) {
+            // 既存のラベルを探すか、新しいラベルを作成
+            $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);
+            $post->labels()->attach($label->id); // ラベルIDを指定して紐づけ
         }
 
         // 投稿内容からハッシュタグを抽出
