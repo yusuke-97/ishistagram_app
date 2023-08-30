@@ -4,7 +4,11 @@
 <div class="container">
 
     <!-- 検索クエリに基づくヘッダタイトル -->
+    @if(isset($isUsernameSearch) && $isUsernameSearch)
+    <h1>{{ $query }}の検索結果</h1>
+    @else
     <h1>#{{ $query }}の検索結果</h1>
+    @endif
 
     <!-- 投稿が存在する場合の処理 -->
     @if($posts->count())
@@ -45,8 +49,14 @@
         @endforeach
     </div>
     @else
+
     <!-- 検索結果が0件の場合のメッセージ -->
+    @if(isset($isUsernameSearch) && $isUsernameSearch)
+    <p>該当するユーザーは見つかりませんでした。</p>
+    @else
     <p>該当する投稿は見つかりませんでした。</p>
+    @endif
+
     @endif
 
 </div>

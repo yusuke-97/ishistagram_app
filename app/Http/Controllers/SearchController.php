@@ -12,10 +12,13 @@ class SearchController extends Controller
     public function searchTags(Request $request)
     {
         $query = $request->query('query');
+        $isUsernameSearch = false;
 
         // クエリが#で始まっている場合、#を除去
         if (strpos($query, '#') === 0) {
             $query = substr($query, 1);
+        } else {
+            $isUsernameSearch = true;
         }
 
         $tags = Tag::where('name', '=', $query)->get();
@@ -26,7 +29,7 @@ class SearchController extends Controller
         })->get();
 
         // 検索結果をビューに渡す
-        return view('search.results', compact('posts', 'query'));
+        return view('search.results', compact('posts', 'query', 'isUsernameSearch'));
     }
 
     public function autocompleteTags(Request $request)
