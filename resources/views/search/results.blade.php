@@ -25,11 +25,19 @@
                 <img src="{{ Storage::disk('s3')->url($image->file_path) }}" alt="投稿画像" class="{{ $key == 0 ? 'ishistagram-post-image' : 'd-none' }}">
                 @endforeach
 
-                <!-- 投稿に複数の画像がある場合、多画像存在を示すアイコンを表示 -->
+                <!-- 複数の画像が存在する投稿にだけ、複数画像アイコンを表示 -->
                 @if(count($post->images) > 1)
-                <div class="multiple-image-icon" data-post-id="{{ $post->id }}">
+
+                <!-- モバイル用 -->
+                <div class="multiple-image-icon d-block d-md-none" data-post-id="{{ $post->id }}">
                     <i class="fa-regular fa-clone"></i>
                 </div>
+
+                <!-- デスクトップ用 -->
+                <div class="multiple-image-icon d-none d-md-block" data-post-id="{{ $post->id }}">
+                    <i class="fa-regular fa-clone"></i>
+                </div>
+
                 @endif
 
             </div>
