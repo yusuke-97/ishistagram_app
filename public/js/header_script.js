@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Navbarの要素を取得
-    var navbar = document.querySelector('#navbarSupportedContent'); // Navbarの要素を取得
+    var navbar = document.querySelector('#navbarSupportedContent');
     
     // プロフィールドロップダウンの要素を取得
     var profileDropdown = document.querySelector('.header-dropdown'); 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var navbarToggler = document.querySelector('.navbar-toggler');
     
     // BootstrapのCollapse機能を利用するためのインスタンス生成
-    var myCollapse = new bootstrap.Collapse(navbar, { toggle: false }); // BootstrapのCollapse機能を利用するためのインスタンス生成
+    var myCollapse = new bootstrap.Collapse(navbar, { toggle: false });
 
     // プロフィールドロップダウンが存在する場合のロジック
     if (profileDropdown) {
