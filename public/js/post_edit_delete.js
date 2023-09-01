@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let postContent = editButton.getAttribute('data-post-content');
             
             // モーダル内のフォームを取得
-            let editPostForm = modal.querySelector('form[name="editPostForm"]'); // モーダル内のフォームを取得
+            let editPostForm = modal.querySelector('form[name="editPostForm"]');
 
             // フォームの各要素に取得した投稿の情報を設定
             editPostForm.action = `posts/${postId}`;
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let postTitle = deleteButton.dataset.postTitle;
             
             // モーダル内のメッセージ要素を取得
-            let deleteMessage = modal.querySelector('#deletePostModalLabel'); // モーダル内のメッセージ要素を取得
+            let deleteMessage = modal.querySelector('#deletePostModalLabel');
         });
     });
 });
