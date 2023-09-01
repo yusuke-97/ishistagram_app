@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    // 一覧ページ
+    /**
+     * 投稿の一覧表示
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $posts = Post::with('images')->latest()->get();
 
-        // 各投稿の内容を変換
         foreach ($posts as $post) {
             $post->content = $this->convertHashtagsToLinks($post->content);
         }
@@ -25,15 +28,13 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    // 作成ページ
-    // public function create()
-    // {
-    //     return view('posts.create');
-    // }
-
+    /**
+     * 新しい投稿の作成画面を表示
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
-        // 現在のユーザーの全ての投稿に関連付けられているラベルを取得
         $labels = Label::whereHas('posts', function ($query) {
             $query->whereIn('posts.id', Auth::user()->posts->pluck('id')->toArray());
         })->get();
@@ -41,79 +42,31 @@ class PostController extends Controller
         return view('posts.create', compact('labels'));
     }
 
-    // 作成機能
-    // public function store(Request $request)
-    // {
-    //     // バリデーションの設定
-    //     $request->validate([
-    //         'image' => 'required',
-    //         'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-    //         'content' => 'required|max:255',
-    //     ]);
-
-    //     // ラベルの数を確認
-    //     $labelNames = explode(',', $request->input('labels'));
-    //     if (count($labelNames) > 2) {
-    //         return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
-    //     }
-
-    //     $post = new Post();
-    //     $post->content = $request->input('content');
-    //     $post->user_id = Auth::id();
-    //     $post->save();
-
-    //     // 複数ファイルを保存し、保存先のパスを取得
-    //     if ($files = $request->file('image')) {
-    //         foreach ($files as $file) {
-    //             $path = Storage::disk('s3')->put('post_images', $file, 'public');
-    //             // 保存先のパスをImageモデルに設定
-    //             $image = new Image();
-    //             $image->file_path = $path;
-    //             $image->post_id = $post->id;
-    //             $image->save();
-    //         }
-    //     }
-
-    //     // ラベルの処理
-    //     foreach ($labelNames as $labelName) {
-    //         // 既存のラベルを探すか、新しいラベルを作成
-    //         $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);
-    //         $post->labels()->attach($label->id); // ラベルIDを指定して紐づけ
-    //     }
-
-    //     // 投稿内容からハッシュタグを抽出
-    //     preg_match_all('/#([\p{L}\p{Mn}\p{Pd}0-9_]+)/u', $request->input('content'), $tags);
-    //     $tags = $tags[1];
-
-    //     // タグを保存または取得し、投稿と関連付け
-    //     foreach ($tags as $tagName) {
-    //         $tag = Tag::firstOrCreate(['name' => $tagName]);
-    //         $post->tags()->attach($tag->id);
-    //     }
-
-    //     return redirect()->route('posts.index', compact('post'))->with('flash_message', '投稿が完了しました。');
-    // }
-
-
+    /**
+     * 投稿の保存
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
-        // バリデーションの設定
+        // バリデーション: 画像と内容のチェック
         $request->validate([
             'image' => 'required',
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             'content' => 'required|max:255',
         ]);
 
+        // 投稿内容の保存
         $post = new Post();
         $post->content = $request->input('content');
         $post->user_id = Auth::id();
         $post->save();
 
-        // 複数ファイルを保存し、保存先のパスを取得
+        // 画像の保存
         if ($files = $request->file('image')) {
             foreach ($files as $file) {
                 $path = Storage::disk('s3')->put('post_images', $file, 'public');
-                // 保存先のパスをImageモデルに設定
                 $image = new Image();
                 $image->file_path = $path;
                 $image->post_id = $post->id;
@@ -121,24 +74,23 @@ class PostController extends Controller
             }
         }
 
-        // ラベルの処理
-        $labelsInput = $request->input('labels', []);  // 配列として受け取る
+        // ラベルの関連付け
+        $labelsInput = $request->input('labels', []);
         $labelNames = is_string($labelsInput) ? explode(',', $labelsInput) : $labelsInput;
 
         if (count($labelNames) > 2) {
             return back()->withInput()->withErrors(['labels' => '最大2つのラベルしか作成できません。']);
         }
 
+        // 投稿内容からハッシュタグを取得し、関連付け
         foreach ($labelNames as $labelName) {
-            $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);  // user_idもセット
-            $post->labels()->attach($label->id);  // 投稿とラベルを関連付け
+            $label = Label::firstOrCreate(['name' => $labelName, 'user_id' => Auth::id()]);
+            $post->labels()->attach($label->id);
         }
 
-        // 投稿内容からハッシュタグを抽出
+        // ハッシュタグの関連付け処理
         preg_match_all('/#([\p{L}\p{Mn}\p{Pd}0-9_]+)/u', $request->input('content'), $tags);
         $tags = $tags[1];
-
-        // タグを保存または取得し、投稿と関連付け
         foreach ($tags as $tagName) {
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $post->tags()->attach($tag->id);
@@ -147,15 +99,18 @@ class PostController extends Controller
         return redirect()->route('posts.index', compact('post'))->with('flash_message', '投稿が完了しました。');
     }
 
-    // 編集ページ
+    /**
+     * 投稿の編集画面を表示
+     *
+     * @param Post $post
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function edit(Post $post)
     {
-        // 編集する投稿のオーナーが現在のユーザーであるかチェック
         if (Auth::id() !== $post->user_id) {
             return redirect()->back()->with('error', '権限がありません。');
         }
 
-        // 現在のユーザーの全ての投稿に関連付けられているラベルを取得
         $labels = Label::whereHas('posts', function ($query) {
             $query->whereIn('posts.id', Auth::user()->posts->pluck('id')->toArray());
         })->get();
@@ -163,21 +118,26 @@ class PostController extends Controller
         return view('posts.edit', compact('post', 'labels'));
     }
 
-
-    // 更新機能
+    /**
+     * 投稿の更新
+     *
+     * @param Request $request
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, Post $post)
     {
-        // バリデーションの設定
+        // バリデーション: 内容のチェック
         $request->validate([
             'content' => 'required|max:255',
         ]);
 
-        // 投稿の内容を更新
+        // 投稿内容の更新
         $post->content = $request->input('content');
         $post->save();
 
-        // ラベルの処理
-        $labelsInput = $request->input('labels', []);  // 配列として受け取る
+        // ラベルの更新: 既存のラベルと新しいラベルの比較、追加、削除処理
+        $labelsInput = $request->input('labels', []);
         $labelNames = is_string($labelsInput) ? explode(',', $labelsInput) : $labelsInput;
 
         if (count($labelNames) > 2) {
@@ -233,22 +193,25 @@ class PostController extends Controller
             }
         }
 
-        // 最後に、適当なページにリダイレクトさせる
         return redirect()->route('profile.default')->with('flash_message', '投稿を更新しました。');
     }
 
-
-    // 削除機能
+    /**
+     * 投稿の削除
+     *
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Post $post)
     {
-        // この投稿に紐づくラベルとタグを取得
+        // 削除前に、この投稿に関連するラベルとタグを取得
         $labels = $post->labels;
         $tags = $post->tags;
 
-        // 投稿を削除
+        // 投稿の削除
         $post->delete();
 
-        // この投稿に紐づいていたラベルをチェック
+        // ラベルとタグの削除処理: 使用されていないラベルやタグの削除
         foreach ($labels as $label) {
             // このラベルを持つ他の投稿がないか確認
             if ($label->posts->count() == 0) {
@@ -269,16 +232,29 @@ class PostController extends Controller
         return redirect()->route('profile.default')->with('flash_message', '投稿を削除しました。');
     }
 
-    // #同じハッシュタグを持つ投稿ページ
+    /**
+     * 投稿の詳細表示: ハッシュタグを持つ投稿の詳細ページ
+     *
+     * @param Post $post
+     * @return \Illuminate\View\View
+     */
     public function show(Post $post)
     {
+        // 投稿の内容に含まれるハッシュタグをリンクに変換
         $post->content = $this->convertHashtagsToLinks($post->content);
 
         return view('modals.show_post', ['post' => $post]);
     }
 
+    /**
+     * ハッシュタグをリンクに変換する関数
+     *
+     * @param string $content
+     * @return string
+     */
     private function convertHashtagsToLinks($content)
     {
+        // 投稿の内容に含まれるハッシュタグを抽出し、リンクに変換
         preg_match_all('/#([\p{L}\p{N}_]+)/u', $content, $matches);
 
         // マッチしたハッシュタグを長さの降順にソート
