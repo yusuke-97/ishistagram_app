@@ -4,7 +4,7 @@ function isAnyModalOpen() {
 
 function showPostDetails(postId) {
     if (isAnyModalOpen()) {
-        // すでに開いているモーダルがあれば、新しいモーダルは表示しない
+        // 他のモーダルがすでに開かれている場合、新しいモーダルを開かない
         return;
     }
 
@@ -13,57 +13,60 @@ function showPostDetails(postId) {
     $.get(url, function(response) {
         var modalID = "#showPostModal" + postId;
 
-        // .modal-bodyの内容だけを抽出
+        // レスポンスから.modal-bodyの内容を取得
         var modalBodyContent = $(response).find('.modal-body').html();
 
-        // モーダルの内容を更新
+        // 取得した内容でモーダルの内容を更新
         $(modalID + ' .modal-body').html(modalBodyContent);
 
-        // モーダル内の特定のドロップダウンメニューを非表示にする
+        // モーダル内のドロップダウンメニューを非表示にする
         $(modalID + ' .user-action-dropdown .dropdown-menu').hide();
 
-        // イベントリスナーを再度バインド
+        // イベントリスナーをバインド（具体的な動作は関数内で定義）
         bindEventListeners();
 
 
-        // モーダルが表示された直後のイベントをバインド
+        // モーダルが完全に表示された後のイベントをバインド
         $(modalID).off('shown.bs.modal').on('shown.bs.modal', function() {
-            // モーダル内のドロップダウン初期化前に既存の初期化を解除
-        $(this).find('[data-bs-toggle="dropdown"]').dropdown('dispose');
+            // 既存のドロップダウンの初期化を解除
+            $(this).find('[data-bs-toggle="dropdown"]').dropdown('dispose');
 
-        var dropdownElements = $(this).find('[data-bs-toggle="dropdown"]');
-        dropdownElements.each(function() {
-            var dropdownInstance = new bootstrap.Dropdown(this, {
-                display: 'static'  // Popper.jsの挙動を止める
+            // 新たにドロップダウンを初期化
+            var dropdownElements = $(this).find('[data-bs-toggle="dropdown"]');
+            dropdownElements.each(function() {
+                var dropdownInstance = new bootstrap.Dropdown(this, {
+                    display: 'static'  // Popper.jsの動作を無効化
+                });
+                dropdownInstance.update(); // 位置を再計算
             });
-            dropdownInstance.update(); // 位置を再計算
-        });
         
-            // transformのリセット
+            // transformをリセットしてドロップダウンの位置を調整
             $(this).find('.dropdown-menu').css('transform', '');
         
-            // イベントリスナーの追加前に既存のイベントリスナーを解除
+            // 既存のイベントリスナーを解除して、新しいイベントリスナーを追加
             $(this).find('.dropdown-toggle').off('click').on('click', function() {
                 var dropdownMenu = $(this).next('.dropdown-menu');
                 dropdownMenu.toggle();
             });
         
-            // モーダル内のドロップダウンを強制的に閉じる
+            // モーダル内のドロップダウンを閉じる
             var dropdownElement = $(this).find('.dropdown');
             dropdownElement.removeClass('show');
             dropdownElement.find('.dropdown-menu').hide();
         });
         
+        // モーダルを表示
         $(modalID).modal('show');
-        
     });
 }
 
-
+// 画面の任意の位置がクリックされたときの動作
 $(document).click(function(event) {
+    // 何らかのモーダルが開かれている場合のみ動作
     if (isAnyModalOpen()) {
         var target = $(event.target);
 
+        // ドロップダウンメニューまたはトグルボタン外をクリックした場合、メニューを非表示にする
         if (!target.closest('.dropdown-toggle').length && !target.closest('.dropdown-menu').length) {
             $('.user-action-dropdown .dropdown-menu').hide();
         }
