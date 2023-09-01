@@ -1,24 +1,27 @@
+// 最後の操作を特定するためのトークン
 let lastToken = null;
 let saveButton;
 
+// プロフィール画像のカスタム選択ボタンのクリック時の動作
 document.getElementById('customProfile').addEventListener('click', function() {
     document.getElementById('profile_image').click();
 });
 
+// プロフィール画像削除ボタンのクリック時の動作
 document.getElementById('deleteProfileImage').addEventListener('click', function(e) {
     e.preventDefault();
 
     lastToken = Date.now();
-
     let profileImageDisplay = document.getElementById('currentProfileImage');
-    let existingProfileIcon = document.querySelector('.fas.fa-user.fa-2x.edit-profile-icon'); // 変更点
+    let existingProfileIcon = document.querySelector('.fas.fa-user.fa-2x.edit-profile-icon');
 
+    // 画像が表示されている場合、それを削除し、代わりにデフォルトのアイコンを表示
     if (profileImageDisplay) {
         profileImageDisplay.remove();
 
         if (!existingProfileIcon) {
             let profileIcon = document.createElement('i');
-            profileIcon.className = "fas fa-user fa-2x edit-profile-icon";  // 変更点
+            profileIcon.className = "fas fa-user fa-2x edit-profile-icon";
             let container = document.querySelector('.d-flex.align-items-center.mb-2');
             container.insertBefore(profileIcon, document.getElementById('customProfile'));
         }
@@ -28,19 +31,18 @@ document.getElementById('deleteProfileImage').addEventListener('click', function
     lastToken = 'delete';
 });
 
-console.log("script loaded");
-
+// ドキュメント読み込み完了時の処理
 document.addEventListener("DOMContentLoaded", function() {
     let profileImageInput = document.getElementById('profile_image');
-    saveButton = document.querySelector(".btn.share-btn");  // 値を設定
+    saveButton = document.querySelector(".btn.share-btn");
 
+    // 画像選択時の処理
     profileImageInput.addEventListener('change', async function(event) {
         let file = event.target.files[0];
         if (file) {
             // 新しいトークンを生成
             lastToken = Date.now();
-
-            saveButton.disabled = true;  // 追加
+            saveButton.disabled = true;
 
             try {
                 let result = await readImageAsDataURL(file);
@@ -49,14 +51,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error("Error reading the file:", error);
             }
         }
-        // 画像選択操作のトークンを生成
+
         lastToken = 'select';
     });
+
+    // 画像選択後、削除フラグをリセット
     document.getElementById('profile_image').addEventListener('change', function() {
-        document.getElementById('delete_image_flag').value = '0';  // 追加: フラグをリセット
+        document.getElementById('delete_image_flag').value = '0';
     });    
 });
 
+// 画像ファイルをDataURLとして読み込む関数
 function readImageAsDataURL(file) {
     return new Promise((resolve, reject) => {
         let reader = new FileReader();
@@ -70,15 +75,18 @@ function readImageAsDataURL(file) {
     });
 }
 
+// 画像を表示、または更新する関数
 function handleImageDisplay(dataURL, token) {
     if (token === lastToken) {
         let profileImageDisplay = document.getElementById('currentProfileImage');
+        let profileIcon = document.querySelector('.fas.fa-user.fa-2x.edit-profile-icon');
 
-        let profileIcon = document.querySelector('.fas.fa-user.fa-2x.edit-profile-icon');  // 変更点
+        // 既存のデフォルトアイコンを削除
         if (profileIcon) {
             profileIcon.remove();
         }
 
+        // 既存の画像を更新、または新しい画像を追加
         if (profileImageDisplay) {
             profileImageDisplay.src = dataURL;
         } else {
@@ -87,7 +95,7 @@ function handleImageDisplay(dataURL, token) {
             newImage.src = dataURL;
             newImage.alt = "プロフィール画像";
             newImage.width = 100;
-            newImage.className = "edit-profile-image";  // 変更点
+            newImage.className = "edit-profile-image";
 
             let container = document.querySelector('.d-flex.align-items-center.mb-2');
             container.insertBefore(newImage, document.getElementById('profile_image'));
@@ -116,7 +124,6 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        // 必要に応じて追加の処理を実行
     })
     .catch(error => {
         console.error('Error:', error);
