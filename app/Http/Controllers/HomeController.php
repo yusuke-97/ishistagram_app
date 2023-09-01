@@ -13,11 +13,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        // 'auth'ミドルウェアを適用して、ログインしていないユーザーをログインページにリダイレクト
         $this->middleware('auth');
     }
 
     /**
-     * Show the application dashboard.
+     * アプリケーションのダッシュボードを表示
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
