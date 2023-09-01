@@ -52,7 +52,7 @@
         <div class="mt-2 mb-4 d-flex align-items-center justify-content-between">
 
             <!-- ユーザーの本名 -->
-            <p class="bold larger-text mb-0 mr-2" style="font-size: 90%;">{{ $user->name }}</p>
+            <p class="larger-text mb-0 mr-2" style="font-size: 90%; font-weight: bold;">{{ $user->name }}</p>
 
             <!-- ログイン中のユーザーがプロフィールのユーザーと同一である場合の編集リンク -->
             @if (auth()->user()->id == $user->id)

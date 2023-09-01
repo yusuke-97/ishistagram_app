@@ -20,7 +20,7 @@
         <div class="d-flex align-items-center justify-content-between">
 
             <!-- ユーザーの本名表示 -->
-            <p class="bold larger-text mb-0 mr-2">{{ $user->name }}</p>
+            <p class="larger-text mb-0 mr-2" style="font-weight: bold;">{{ $user->name }}</p>
 
             <!-- 現在のユーザーが表示中のユーザー本人かどうかで表示を切り替え -->
             @if (auth()->user()->id == $user->id)

@@ -1,126 +1,29 @@
-/* ==================== 
-   グローバルスタイル (共通部分)
-   ==================== */
+/*--------------------------------
+ # グローバルスタイル (共通部分)
+---------------------------------*/
+body, html {
+    overflow-x: hidden;
+}
+
 body {
     font-family: "Inter", sans-serif;
 }
 
-body, html {
-    overflow-x: hidden; /* 横方向のスクロールを防ぐため */
-}
-
-.navbar.fixed-top {
-    width: 100%; /* 念のため */
-}
-
-main {
-    overflow-y: auto; /* 必要に応じてスクロールを許可 */
-    overflow-x: hidden;
-}
-
 .modal {
-    z-index: 2000; /* この値は状況に応じて調整してください */
+    z-index: 2000;
 }
 
-
-
-.card-header {
+.text-center {
     display: flex;
-    align-items: center;
-    justify-content: start;
-    height: 70px;
-}
-
-.card-header a {
-    display: flex; 
-    align-items: center; /* 縦方向の中央揃え */
-}
-
-.card-header-profile, .card-header-profile-icon {
-    margin-right: 20px; /* アイコンとユーザー名の間にスペースを追加 */
-}
-
-
-.card-header-profile {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: 10px;
-    margin-right: 20px;
-}
-
-.card-header-profile-icon {
-    width: 45px;
-    height: 45px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    padding: 3px;
-    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #ffffff; /* アイコンの色を白に設定 */
-    background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
-    font-size: 25px;
-    margin-left: 10px;
-}
-
-/* ヘッダー */
-.icon-wrapper {
-    display: inline-block;
-    width: 24px;
-    text-align: center;
-}
-
-.icon-space {
-    margin-right: 1rem;
-}
-
-.header-icon {
-    font-size: 30px;
-    vertical-align: middle;
-}
-
-.header-profile-icon {
-    flex-shrink: 0;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    padding: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff; /* アイコンの色を白に設定 */
-    background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
-    font-size: 15px;
-    margin-right: 0.5rem;
 }
 
 
-
-.header-profile {
-    flex-shrink: 0;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #333;
-    display: inline-block; /* 追加 */
-    text-align: center; /* 追加 */
-    margin-right: 0.5rem;
-}
-
-.profile-icon {
-    vertical-align: middle;
-    margin-right: 1.5rem;
-}
-
-.nav-item .d-flex {
-    min-width: 100px; /* この値は調整が必要な場合があります */
-}
-
-/* ログイン */
+/*--------------------------------
+ # ログイン
+---------------------------------*/
 .ishistagram-login-input {
     border-radius: 2px;
     border: solid 1px #b2b2b2;
@@ -209,30 +112,74 @@ main {
     letter-spacing: normal;
 }
 
-/* トップページ */
-/* @media (min-width: 768px) {
-    .card {
-        max-width: 500px;
-        margin: auto;
-    }
-} */
 
-.image-wrapper {
-    width: 100%;
-    padding-bottom: 100%;
-    position: relative;
-    background: #f5f5f5;
+/*--------------------------------
+ # ヘッダー
+---------------------------------*/
+.header-icon {
+    font-size: 30px;
+    vertical-align: middle;
 }
 
-.image-wrapper img {
-    position: absolute;
+.icon-wrapper {
+    display: inline-block;
+    width: 24px;
+    text-align: center;
+}
+
+.icon-space {
+    margin-right: 1rem;
+}
+
+.header-profile-image {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     object-fit: cover;
-    width: 100%;
-    height: 100%;
+    border: 2px solid #333;
+    display: inline-block;
+    text-align: center;
+    margin-right: 0.5rem;
 }
 
-/* 一覧画面 */
-/* プロフィール */
+.header-profile-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: #aaaaaa;
+    font-size: 15px;
+    margin-right: 0.5rem;
+}
+
+.navbar.fixed-top {
+    width: 100%;
+}
+
+.nav-item .d-flex {
+    min-width: 100px;
+}
+
+
+/*--------------------------------
+ # メイン
+---------------------------------*/
+main {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/*--------------------------------
+ # プロフィール画面
+---------------------------------*/
 .btn-following {
     background-color: lightgray;
     border-color: lightgray;
@@ -245,8 +192,38 @@ main {
     color: black;
 }
 
+.user-name {
+    margin-top: 10px;
+}
+
+.profile-link:hover {
+    opacity: 0.7;
+}
+
+.larger-text {
+    font-size: 1.2em;
+}
+
+/* デスクトップ用のプロフィール */
+.multiple-image-icon.d-none.d-md-block {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 .profile-icon {
+    vertical-align: middle;
+    margin-right: 1.5rem;
     width: 150px;
     height: 150px;
     border: 3px solid #ddd;
@@ -255,31 +232,35 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff; /* アイコンの色を白に設定 */
-    background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
+    color: #ffffff;
+    background-color: #aaaaaa;
     font-size: 100px;
     margin-right: 0;
-}
-
-/* 新しいスタイル */
-.text-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .profile-icon i.fas {
     margin: 0;
     padding: 0;
-    font-size: 100px; /* 必要に応じてサイズを調整 */
-    line-height: 150px; /* アイコンの高さと同じに設定 */
+    font-size: 100px;
+    line-height: 150px;
 }
 
-.user-name {
-    margin-top: 0; /* このマージンを調整して、ユーザー名の位置を変更できます */
+/* モバイル用のプロフィール */
+.multiple-image-icon.d-block.d-md-none {
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    right: 5px;
+    font-size: 18px;
+    color: #ffffff;
 }
 
+.mobile-profile-image {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
 .mobile-profile-icon {
     width: 90px;
@@ -290,28 +271,9 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff; /* アイコンの色を白に設定 */
-    background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
+    color: #ffffff;
+    background-color: #aaaaaa;
     font-size: 50px;
-}
-
-.profile-link:hover {
-    opacity: 0.7;
-}
-
-.mobile-profile-image {
-    /* margin-left: 1.5rem; */
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.profile-image {
-    width: 150px; /* 画像の横幅を制御します。必要に応じて値を変更してください */
-    height: 150px; /* 画像の高さを制御します。必要に応じて値を変更してください */
-    border-radius: 50%; /* 画像を円形にします */
-    object-fit: cover; /* 画像のアスペクト比を保ちつつ、指定したwidthとheightに収まるようにします */
 }
 
 .stats-links {
@@ -319,10 +281,82 @@ main {
     justify-content: space-between;
 }
 
+
+/*--------------------------------
+ # 検索モーダル
+---------------------------------*/
+#search-form {
+    position: relative;
+}
+
+#searchModal .modal-content {
+    max-height: 60%;
+}
+
+#searchModal .modal-body {
+    overflow-y: auto;
+}
+
+/* 検索の自動補完機能 */
+.autocomplete-results {
+    border: 2px solid #ddd;
+    background-color: #f9f9f9;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-image-container {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: #ffffff;
+    background-color: #aaaaaa;
+}
+
+.autocomplete-profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.autocomplete-profile-icon {
+    font-size: 15px;
+}
+
+#autocomplete-results div:hover {
+    background-color: #eaeaea;
+}
+
+.user-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-name,
+.user-fullname {
+    margin: 0;
+}
+
 .small-profile-image {
     width: 45px;
     height: 45px;
-    border-radius: 50%; /* 画像を円形に */
+    border-radius: 50%;
 }
 
 .small-profile-icon {
@@ -334,83 +368,59 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff; /* アイコンの色を白に設定 */
-    background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
-    font-size: 30px;
+    color: #ffffff;
+    background-color: #aaaaaa;
 }
 
 .d-flex div p {
-    margin: 0; /* 余白を削除 */
-    font-size: 14px; /* フォントサイズを変更 */
+    margin: 0;
+    font-size: 14px;
 }
 
-.bold {
-    font-weight: bold; /* 文字を太くします */
-}
 
-.larger-text {
-    font-size: 1.2em; /* 文字サイズを1.2倍にします */
-}
-
-.user-name {
-    margin-top: 10px; /* ユーザーネームと画像の間に余白を追加します */
-}
-
-.ishistagram-post-container {
-    padding: 5px;
-}
-
-.ishistagram-image-container {
-    overflow: hidden;
+/*--------------------------------
+ # 新規投稿画面
+---------------------------------*/
+.image-div {
     position: relative;
-    padding-bottom: 100%;
+    padding-top: 33.333%;
 }
 
-.ishistagram-post-image {
+.image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    position: absolute;
+    overflow: hidden;
 }
 
-.ishistagram-post-image:hover {
+.image-container:hover {
     opacity: 0.7;
     cursor: pointer;
 }
 
-/* デスクトップ用 */
-.multiple-image-icon.d-none.d-md-block {
+.close-button {
+    display: none;
     position: absolute;
-    z-index: 1;
     top: 10px;
     right: 10px;
-    font-size: 24px; /* これはデスクトップ用のアイコンのサイズです。 */
-    color: #ffffff;
-}
-
-
-/* モバイル用 */
-.multiple-image-icon.d-block.d-md-none {
-    position: absolute;
-    z-index: 1;
-    top: 5px; /* モバイル用の位置を微調整します。 */
-    right: 5px; /* モバイル用の位置を微調整します。 */
-    font-size: 18px; /* モバイル用のアイコンのサイズを小さくします。 */
-    color: #ffffff;
-}
-
-.ishistagram-post-content {
-    font-family: YuGo;
-    font-size: 12px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
+    font-size: 20px;
     color: #000000;
+    cursor: pointer;
 }
 
-/* 投稿画面 */
+.image-container:hover .close-button {
+    display: block;
+}
+
+.preview-image {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
 .select-image-btn,
 .add-label-btn {
     background-color: #e0e0e0;
@@ -436,6 +446,10 @@ main {
     background-color: #f1f1f1;
 }
 
+.selected-label-item:hover {
+    opacity: 0.7;
+}
+
 .selected-label-item button {
     color: white;
     margin-left: 5px;
@@ -447,10 +461,6 @@ main {
 .selected-label-item button i.fa-solid.fa-xmark {
     font-size: 10px;
     color: #888;
-}
-
-.selected-label-item:hover {
-    opacity: 0.7;
 }
 
 .share-btn {
@@ -466,358 +476,35 @@ main {
     margin-right: 8px;
 }
 
-.image-div {
-    position: relative;
-    padding-top: 33.333%;
-}
-
-.image-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.preview-image {
-    position: absolute;
-    object-fit: cover; /* 画像をコンテナにフィットさせ、アスペクト比を維持します */
-    width: 100%;
-    height: 100%;
-}
-
-.image-container:hover {
-    opacity: 0.7; /* ホバー時の透明度 */
-    cursor: pointer; /* ホバー時のカーソルの形状 */
-}
-
-.close-button {
-    display: none; /* 追加 */
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px; /* 小さい画面でのフォントサイズ */
-    color: #000000;
-    cursor: pointer;
-}
-
-.image-container:hover .close-button {
-    display: block; /* 追加 */
-}
-
-/* ラベルの表示エリアのコンテナのスタイル */
+/* ラベルの表示エリア */
 #labelsList {
-    display: flex; /* フレックスボックスを使用して子要素を横並びにする */
-    flex-wrap: wrap; /* 必要に応じて折り返しを行う */
-    gap: 30px; /* ラベル項目間のギャップを指定 */
-    align-items: center; /* 項目を中央に配置 */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
 }
 
-/* 各ラベルコンテナのスタイル */
+/* 各ラベルコンテナ */
 .form-check {
-    display: flex; /* フレックスボックスを使用して子要素を横並びにする */
-    align-items: center; /* 子要素を中央に配置 */
-    gap: 5px; /* チェックボックスとラベル間のギャップを指定 */
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-/* 投稿文のテキストエリアのリサイズを無効にする */
+/* 投稿文のテキストエリア */
 #content {
     resize: none;
 }
 
-/* 中サイズの画面でのフォントサイズ
-@media (min-width: 768px) {
-    .close-button {
-        font-size: 30px;
-    }
-}
 
-/* 大サイズの画面でのフォントサイズ */
-/* @media (min-width: 1200px) {
-    .close-button {
-        font-size: 40px;
-    }
-} */
-
-/* 投稿表示モーダル */
-.modal-header {
-    display: flex;
-    align-items: center; /* ヘッダー内要素を中央に配置 */
-    justify-content: space-between; /* 要素間のスペースを最大化 */
-}
-
-.modal-user-info {
-    display: flex;
-    align-items: center; /* 要素を縦方向の中央に配置 */
-}
-
-.modal-profile-image {
-    width: 45px; /* 画像のサイズを調整 */
-    height: 45px;
-    border-radius: 50%; /* 画像を円形に */
-}
-
-.modal-profile-icon {
-    width: 45px;
-    height: 45px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    padding: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff; /* アイコンの色を白に設定 */
-    background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
-    font-size: 30px;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    top: auto !important;
-    left: auto !important;
-    right: 0 !important;  /* dropdown-menu-endの振る舞いを再現 */
-    bottom: auto !important;
-    transform: translate3d(0, 0, 0) !important;  /* この位置の微調整が必要であれば行う */
-}
-
-
-
-.modal .dropdown-menu {
-    z-index: 2000;
-    display: none;
-}
-
-/* ︙ボタンの太さ調整 */
-.dropdown-toggle::after {
-    display: none; /* 逆三角形マークを非表示 */
-}
-
-
-.modal-user {
-    margin: 0;
-    align-self: center; /* 画像の中心に合わせる */
-    font-weight: 700;
-}
-
-.modal-image-container {
-    width: 100%; /* コンテナの幅を最大にする */
-    padding-bottom: 100%; /* 高さを幅と同じにするためのパディング */
-    position: relative; /* 子要素のpositioningの基準となる */
-}
-
-.modal-image {
-    position: absolute; /* 親要素に対する絶対位置 */
-    top: 0; /* トップからの位置を0に設定 */
-    left: 0; /* 左からの位置を0に設定 */
-    width: 100%; /* 親要素の幅に合わせる */
-    height: 100%; /* 親要素の高さに合わせる */
-    object-fit: cover; /* 画像がコンテナのサイズにフィットするように */
-    margin-bottom: 20px;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    display: none;
-    top: 50%; /* これにより矢印が縦方向の中央に配置されます。 */
-    transform: translateY(
-        -50%
-    ); /* これは矢印の高さの半分だけ上に移動し、完全に中央に配置するためのものです。 */
-    align-items: center; /* 縦方向の中央に配置 */
-    bottom: unset; /* デフォルトのbottom設定を解除 */
-}
-
-.carousel-control-prev .fa-circle-chevron-left,
-.carousel-control-next .fa-circle-chevron-right {
-    font-size: 32px; /* アイコンのサイズを24pxに設定します。これは例で、必要に応じてサイズを調整してください。 */
-}
-
-.carousel-indicators li {
-    margin-right: 8px;
-    list-style-type: none;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background-color: #555; /* これはドットの色を設定します。必要に応じて変更してください。 */
-}
-
-.carousel-indicators li::before {
-    content: "";
-}
-
-
-.carousel-indicators .active {
-    background-color: #fff; /* これはアクティブなドットの色を設定します。必要に応じて変更してください。 */
-}
-
-.action-buttons {
-    display: flex; /* 横並び */
-    flex-direction: row; /* アイテムを横に並べる */
-    align-items: flex-start; /* 左に寄せる */
-    gap: 15px; /* アイコン間の隙間 */
-}
-
-.button-like {
-    border: none; /* ボタンの枠線を非表示にする */
-    background: transparent; /* ボタンの背景を透明にする */
-    cursor: pointer; /* ホバー時にカーソルをポインターに変更する */
-}
-
-/* ハートとコメントアイコンの大きさを同じにする */
-.fa-heart,
-.fa-regular.fa-comment {
-    font-size: 2em; /* 2xの大きさ */
-}
-
-/* コメントアイコンの色と枠を調整 */
-.fa-regular.fa-comment {
-    color: black; /* アイコンの線の色を黒にする */
-}
-
-.like-comment-buttons {
-    display: flex; /* Flexboxを使って横並びにする */
-    align-items: center; /* アイテムを中央に配置 */
-}
-
-.comment-input-section {
-    display: none; /* 最初は非表示に */
-    width: 100%;
-}
-
-.like-and-comment-container {
-    display: flex;
-    flex-direction: column; /* 子要素を上下に配置 */
-    align-items: flex-start; /* 左に寄せる */
-}
-
-.btn.comment-button:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-/* ラベル作成モーダル */
-.create-label-item {
-    display: inline-block;
-    padding: 2px 8px;
-    border: 1px solid #aaa; /* 薄い境界線 */
-    border-radius: 12px; /* 角を丸く */
-    margin: 2px; /* 余白追加 */
-    background-color: #f1f1f1; /* 薄いグレーの背景色 */
-}
-
-.create-label-item button {
-    color: white;
-    margin-left: 5px; /* バツマークとラベル名の間隔 */
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.create-label-item button i.fa-solid.fa-xmark {
-    font-size: 10px; /* アイコンのサイズ調整 */
-    color: #888; /* アイコンの色を薄く */
-}
-
-.create-label-item:hover {
-    opacity: 0.7; /* ホバー時の透明度 */
-}
-
-.like-and-comment-container {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.comment-input-section textarea {
-    width: 100%;
-    box-sizing: border-box;
-    resize: none; /* テキストエリアのリサイズを無効化 */
-}
-
-.comment-input-section {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* 検索フォームのコンテナに対するスタイリング */
-#search-form {
-    position: relative;
-}
-
-#searchModal .modal-content {
-    max-height: 60%; /* 画面の高さの60%に設定 */
-}
-
-#searchModal .modal-body {
-    overflow-y: auto; /* 必要に応じてスクロール追加 */
-}
-
-/* 検索の自動補完機能 */
-.autocomplete-results {
-    border: 2px solid #ddd;
-    background-color: #f9f9f9;
-    width: 100%;
-    border-radius: 5px; /* 角を丸く */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影を追加 */
-}
-
-.result-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px; /* パディングを増やす */
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* 背景色の変化を滑らかに */
-}
-
-.profile-image-container {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    color: #ffffff;
-    background-color: #aaaaaa;
-}
-
-.autocomplete-profile-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover; /* 画像のアスペクト比を保持 */
-}
-
-.autocomplete-profile-icon {
-    font-size: 15px; /* アイコンサイズ調整 */
-}
-
-#autocomplete-results div:hover {
-    background-color: #eaeaea;
-}
-
-.user-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.user-name,
-.user-fullname {
-    margin: 0;
-}
-
-
-
-/* 投稿編集画面 */
+/*--------------------------------
+ # 投稿編集画面
+---------------------------------*/
 .edit-post-image-container {
     width: 100%;
-    padding-top: 100%; /* アスペクト比を1:1にする */
-    position: relative; /* 子要素の絶対位置指定の基点とする */
-    overflow: hidden; /* はみ出した部分を隠す */
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .edit-post-image-container img {
@@ -826,7 +513,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 画像のアスペクト比を保ったまま、コンテナにフィットさせる */
+    object-fit: cover;
 }
 
 .edit-profile-icon {
@@ -839,13 +526,249 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff; /* アイコンの色を白に設定 */
-    background-color: #aaaaaa; /* 円の背景色をグレーに設定 */
+    color: #ffffff;
+    background-color: #aaaaaa;
     font-size: 15px;
 }
 
 
+/*--------------------------------
+ # 投稿一覧画面
+---------------------------------*/
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 70px;
+}
 
+.card-header a {
+    display: flex; 
+    align-items: center;
+}
+
+.card-header-profile, .card-header-profile-icon {
+    margin-right: 20px;
+}
+
+
+.card-header-profile {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.card-header-profile-icon {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: #aaaaaa;
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+.ishistagram-post-container {
+    padding: 5px;
+}
+
+.ishistagram-image-container {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 100%;
+}
+
+.ishistagram-post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.ishistagram-post-image:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+
+/*--------------------------------
+ # 投稿詳細モーダル
+---------------------------------*/
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-user {
+    margin: 0;
+    align-self: center;
+    font-weight: 700;
+}
+
+.modal-user-info {
+    display: flex;
+    align-items: center;
+}
+
+.modal-profile-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.modal-profile-icon {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: #aaaaaa;
+    font-size: 30px;
+}
+
+/* ︙ボタン */
+.dropdown-toggle::after {
+    display: none; /* 逆三角形マークを非表示 */
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    top: auto !important;
+    left: auto !important;
+    right: 0 !important;
+    bottom: auto !important;
+    transform: translate3d(0, 0, 0) !important;
+}
+
+.modal .dropdown-menu {
+    z-index: 2000;
+    display: none;
+}
+
+/* 投稿画像 */
+.modal-image-container {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+}
+
+.modal-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    display: none;
+    top: 50%;
+    transform: translateY(
+        -50%
+    );
+    align-items: center;
+    bottom: unset;
+}
+
+.carousel-control-prev .fa-circle-chevron-left,
+.carousel-control-next .fa-circle-chevron-right {
+    font-size: 32px;
+}
+
+.carousel-indicators li {
+    margin-right: 8px;
+    list-style-type: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #555;
+}
+
+.carousel-indicators li::before {
+    content: "";
+}
+
+
+.carousel-indicators .active {
+    background-color: #fff;
+}
+
+/* いいねとコメント機能 */
+.like-and-comment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.button-like {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.fa-heart,
+.fa-regular.fa-comment {
+    font-size: 2em;
+}
+
+.fa-regular.fa-comment {
+    color: black;
+}
+
+.like-comment-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.comment-input-section {
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.comment-input-section textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.btn.comment-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+/*--------------------------------
+ # プロフィール編集画面
+---------------------------------*/
 .edit-profile-image {
     flex-shrink: 0;
     width: 30px;
@@ -853,6 +776,6 @@ main {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #333;
-    display: inline-block; /* 追加 */
-    text-align: center; /* 追加 */
+    display: inline-block;
+    text-align: center;
 }
