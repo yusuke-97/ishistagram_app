@@ -1,28 +1,28 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    // グローバル変数の初期化
     var userId = window.userId;
     window.loggedInUserId = parseInt(window.loggedInUserId);
 
-    // クローズボタンのイベントハンドラを外部に定義
+    // モーダルを閉じる関数
     function handleCloseButtonClick(modal) {
         modal.hide();
     }    
 
-    // Function to setup modal and close button
+    // モーダルとその閉じるボタンの設定関数
     function setupModalAndCloseButton(modalId) {
         var modal = new bootstrap.Modal(document.getElementById(modalId));
         modal.show();
 
         var closeBtn = document.querySelector('#' + modalId + ' .btn-close');
         if (closeBtn) {
-            // 既存のイベントリスナーを削除
             closeBtn.removeEventListener('click', handleCloseButtonClick);
-            // 新たなイベントリスナーを追加
             closeBtn.addEventListener('click', function() {
                 handleCloseButtonClick(modal);
             });
         }
     }
 
+    // ユーザーへのリンクを作成する関数
     function createUserLink(element, user) {
         var userLink = document.createElement('a');
         userLink.href = '/profile/' + user.id;
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         element.appendChild(userLink);
     }    
 
-    // フォロワーの表示
+    // フォロワーを表示するイベント
     var showFollowersButton = document.getElementById('show-followers');
     if (showFollowersButton) {
         showFollowersButton.addEventListener('click', function(e) {
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.error("'show-followers' element not found!");
     }
 
-    // フォローしている人々の表示
+    // フォローしているユーザーを表示するイベント
     var showFollowingButton = document.getElementById('show-following');
     if (showFollowingButton) {
         showFollowingButton.addEventListener('click', function(e) {
@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.error("'show-following' element not found!");
     }
 
+    // モーダルが非表示になったときのイベント
     const modals = document.querySelectorAll('.modal');
     modals.forEach(function(modal) {
         modal.addEventListener('hidden.bs.modal', function() {
@@ -208,7 +209,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
-
+// ユーザーをフォローする関数
 function followUser(userId) {
     var url = '/follow/' + userId;
     var xhr = new XMLHttpRequest();
@@ -231,7 +232,7 @@ function followUser(userId) {
 }
 
 
-// フォロー解除機能
+// ユーザーのフォローを解除する関数
 function unfollowUser(userId) {
     if (window.confirm('フォローを解除しますか？')) {
         var url = '/unfollow/' + userId;
