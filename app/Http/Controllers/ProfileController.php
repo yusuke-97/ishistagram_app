@@ -12,50 +12,29 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * プロフィールページの初期表示
+     * ログイン中のユーザーの投稿、ラベルを取得して表示
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $posts = Post::where('user_id', Auth::id())->with('images')->latest()->get();
-        $user = Auth::user();  // 現在のユーザーを取得
-        $labels = Label::all(); // ラベルの一覧を取得
-        return view('profile.index', compact('posts', 'user', 'labels'));  // $labelsもビューに渡す
+        $user = Auth::user();
+        $labels = Label::all();
+
+        return view('profile.index', compact('posts', 'user', 'labels'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * ユーザーのプロフィールページの表示
+     * ラベルが指定されている場合、そのラベルに紐づいた投稿を表示
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    // ProfileController.php
-
     public function show(Request $request, $profile = null, $label = null)
     {
-        // デフォルトのルートの場合、ログインユーザーを使用
         if ($profile === null) {
             $user = Auth::user();
         } else {
@@ -83,9 +62,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * プロフィール編集フォームの表示
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $profile
      * @return \Illuminate\Http\Response
      */
     public function edit(User $profile)
@@ -94,7 +73,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * プロフィール情報の更新
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
@@ -108,7 +87,7 @@ class ProfileController extends Controller
             'user_name' => 'required|max:255|unique:users,user_name,' . $profile->id,
             'email' => 'required|email|max:255|unique:users,email,' . $profile->id,
             'bio' => 'nullable',
-            'profile_image' => 'nullable|image|max:4096', // 画像ファイルで、最大2MBを指定
+            'profile_image' => 'nullable|image|max:4096',
         ]);
 
         // データの更新
@@ -122,7 +101,7 @@ class ProfileController extends Controller
             if ($profile->profile_image) {
                 Storage::delete('public/profile_images/' . $profile->profile_image);
             }
-            $profile->profile_image = null; // DBの値も削除
+            $profile->profile_image = null;
         }
         // 画像がアップロードされた場合の処理
         elseif ($request->hasFile('profile_image')) {
@@ -136,6 +115,14 @@ class ProfileController extends Controller
         return redirect()->route('profile.default')->with('flash_message', 'プロフィールを更新しました。');
     }
 
+    /**
+     * ラベルに基づいてユーザーの投稿を表示
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int|null  $profile
+     * @param  string|null  $label
+     * @return \Illuminate\Http\Response
+     */
     public function showLabel(Request $request, $profile = null, $label = null)
     {
         // デフォルトのルートの場合、ログインユーザーを使用
