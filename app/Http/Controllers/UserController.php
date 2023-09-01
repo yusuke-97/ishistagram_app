@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function getFollowers($id)
     {
-        $currentUser = Auth::user(); // ログイン中のユーザーを取得
+        $currentUser = Auth::user();
 
         $user = User::find($id);
         $followers = $user->followers;
@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function getFollowing($id)
     {
-        $currentUser = Auth::user(); // ログイン中のユーザーを取得
+        $currentUser = Auth::user();
 
         $user = User::find($id);
         $following = $user->following;
