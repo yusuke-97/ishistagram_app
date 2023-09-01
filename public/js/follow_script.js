@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function createUserLink(element, user) {
         var userLink = document.createElement('a');
         userLink.href = '/profile/' + user.id;
-        userLink.style.textDecoration = 'none'; // 下線を削除
-        userLink.className = 'd-flex align-items-center'; // 横並びに
+        userLink.style.textDecoration = 'none';
+        userLink.className = 'd-flex align-items-center';
     
         // 画像またはアイコン用のdiv
         var imageDiv = document.createElement('div');
@@ -46,16 +46,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // ユーザー名と名前用のdiv
         var infoDiv = document.createElement('div');
-        infoDiv.style.marginLeft = '10px'; // 画像との間にスペースを追加
+        infoDiv.style.marginLeft = '10px';
     
         var usernameP = document.createElement('p');
         usernameP.textContent = user.user_name;
-        usernameP.style.color = 'black'; // 色を黒に
+        usernameP.style.color = 'black';
         infoDiv.appendChild(usernameP);
 
         var nameP = document.createElement('p');
         nameP.textContent = user.name;
-        nameP.style.color = 'black'; // 色を黒に
+        nameP.style.color = 'black';
         infoDiv.appendChild(nameP);
     
         userLink.appendChild(infoDiv);
@@ -241,7 +241,6 @@ function unfollowUser(userId) {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
-                console.log(response.message, "for user:", response.targetUserId); // ここでサーバーからのレスポンスをコンソールに表示
 
                 alert('フォローを解除しました');
                 location.reload();
