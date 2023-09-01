@@ -5,9 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(event) {
             // クリックされたラベル名のテキストを取得
             var selectedLabelName = event.currentTarget.textContent;
-            
-            // コンソールに表示
-            console.log('選択されたラベル名:', selectedLabelName);
         });
     });
 
