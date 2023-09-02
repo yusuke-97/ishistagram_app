@@ -25,11 +25,11 @@
                         <a href="{{ route('profile.index', ['index' => $post->user->id]) }}" style="text-decoration: none; color: inherit;">
                             <!-- ユーザープロフィール画像の表示 -->
                             @if($post->user->profile_image)
-                            <img class="modal-profile-image" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
+                            <img class="modal-profile-image me-3" src="{{ Storage::disk('s3')->url('profile_images/' . $post->user->profile_image) }}" alt="プロフィール画像">
                             @else
 
                             <!-- プロフィール画像がない場合、プロフィールアイコンを表示 -->
-                            <i class="fas fa-user fa-2x modal-profile-icon"></i> <!-- プロフィール画像がない場合の代替表示 -->
+                            <i class="fas fa-user fa-2x modal-profile-icon me-3"></i> <!-- プロフィール画像がない場合の代替表示 -->
                             @endif
                         </a>
 
