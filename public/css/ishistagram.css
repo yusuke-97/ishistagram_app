@@ -181,14 +181,14 @@ main {
  # プロフィール画面
 ---------------------------------*/
 .btn-following {
-    background-color: lightgray;
-    border-color: lightgray;
+    background-color: #808080;
+    border-color: #808080;
     color: black;
 }
 
 .btn-follow {
-    background-color: lightgreen;
-    border-color: lightgreen;
+    background-color: #48D1CC;
+    border-color: #48D1CC;
     color: black;
 }
 
